@@ -1,0 +1,29 @@
+* {
+  position: relative;
+}
+body {
+  background-color: #ffffff;
+}
+nav {
+  background-color: #62b0d6;
+}
+#logo {
+  width: 20%;
+  padding: 12px;
+}
+.nav-link {
+  color: #ffffff;
+  font-size: 22px;
+  padding-top: 11px;
+  transition: color 0.4s;
+}
+a.nav-link:hover {
+  color: #b3d9eb;
+}
+#link-first {
+  padding-left: 54px;
+}
+footer {
+  height: 48px;
+  background-color: #164156;
+}

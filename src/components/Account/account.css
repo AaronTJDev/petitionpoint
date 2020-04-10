@@ -1,0 +1,16 @@
+.account {
+  display: block;
+  text-align: center;
+}
+.account-form {
+  widtH: 320px;
+  padding: 24px;
+  display: inline-block;
+  text-align: left;
+}
+.header {
+  padding: 16px 0 32px 18px;
+}
+.btn {
+  width: 100%;
+}
