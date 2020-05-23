@@ -110,7 +110,7 @@ export default class Register extends React.Component {
 								null
 							}
 							{
-								this.state.password.length < 7 ?
+								this.state.password.length < 8 ?
 								<li className="text-danger">Passwords must be atleast 8 characters.</li> :
 								null
 							}
@@ -119,7 +119,7 @@ export default class Register extends React.Component {
 					}
                 	<div className="form-group form-check">
 						{ 
-							this.state.vpassword === this.state.password && this.validateEmail(this.state.email) ? 
+							this.state.vpassword === this.state.password && this.validateEmail(this.state.email) && this.state.password.length >= 8 ? 
 								<input onClick={ this.onSubmit } type="submit" className="btn btn-primary" value="Register"/> :
 								<input type="submit" className="btn btn-primary" value="Register" disabled/>
 						}
