@@ -5,17 +5,17 @@ var express = require('express'),
     router = express.Router();
 
 router.post('/login/u', function( req,res ){
-    //console.log(req.body);
     // Find user in the db.
     userModel.findOne({ email: req.body.email }, function( err, user){
         if ( err ) {
             res.status(404).send("User not found with the email that was provided.");
         }
-        console.log(user);
+
         // Compare password set in body of request to password
         bcrypt.compare( req.body.passwordHash , user.passwordHash).then( function( authenticated ) {
             if ( authenticated ) {
-                res.status(200).send("Login successful.");
+                user.set('passwordHash', undefined);
+                res.status(200).send(user);
             }
             else {
                 res.status(400).send("Incorrect password or username provided."); 

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
+import { userContext } from '../../userContext';
 import './account.css';
 
 export default class Login extends React.Component {
@@ -24,28 +25,32 @@ export default class Login extends React.Component {
 	}
 
     handleClick = (e) => {
+        // Prevent navigation to axios post.
         e.preventDefault();
 
+        // Get user info from state
         const userInfo = {
             email: this.state.email,
             passwordHash: this.state.password
         };
         
+        // Send post request to login route using userInfo
         axios.post(`http://localhost:3000/user/login/u`, userInfo )
             .then( res => {
-                console.log(res);
-                // this.setState({ redirect: '/' });
-            }
-            ).catch( err => {
-
+                // Update user object within state in App.js 
+                this.context.loginUser(res.data);
+                // Redirect to home
+                this.setState({ redirect: '/' });
+            }).catch( err => {
+                console.log(err);
             });
-
 	}
   
     render () {
 		if (this.state.redirect) {
 			return <Redirect to={this.state.redirect} />
-		}
+        }
+        
         return (
             <div className="row account">
                 <form className="account-form">
@@ -59,10 +64,11 @@ export default class Login extends React.Component {
                         <input onChange={this.onChange}  type="password" className="form-control" name="password" />
                     </div>
                     <div className="form-group form-check">
-						<input onClick={ this.handleClick } type="submit" className="btn btn-primary" value="Login"/>
+                        <input onClick={ this.handleClick } type="submit" className="btn btn-primary" value="Login"/>
                     </div>
                 </form>
             </div>
         );
     }  
 }
+Login.contextType = userContext;

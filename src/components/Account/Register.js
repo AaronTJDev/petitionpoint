@@ -105,7 +105,7 @@ export default class Register extends React.Component {
 								null
 							}
 							{
-								! ( this.state.password == this.state.vpassword) ?
+								! ( this.state.password === this.state.vpassword) ?
 								<li className="text-danger">Passwords must match</li> :
 								null
 							}
