@@ -3,9 +3,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { userContext } from './userContext';
 import Register from './components/Account/Register';
 import Login from './components/Account/Login';
+import Logout from './components/Account/Logout';
 import axios from 'axios';
-
-
 import './styles.css';
 
 class App extends React.Component {
@@ -31,7 +30,6 @@ class App extends React.Component {
 
     axios.get(`http://localhost:3000/user/${sid}`)
       .then( res => {
-        console.log(res)
         if ( res.data ){
           this.setState({ user: res.data })
         }
@@ -46,14 +44,25 @@ class App extends React.Component {
   }
 
   logout = () => {
-    this.setState({ user: null });
+    axios.post('http://localhost:3000/user/logout/')
+      .then( res => {
+        if ( res.status === 200 ){
+          this.setState({ user: null });
+        }
+      })
+      .catch( err => {
+        if ( err ){
+          // Error handling for front-end here
+        }
+      });
   }
 
   render(){
     // Value object to be consumed by context consumers.
     const value = {
       user: this.state.user,
-      loginUser: this.login
+      loginUser: this.login,
+      logoutUser: this.logout
     };
 
     return (
@@ -70,18 +79,18 @@ class App extends React.Component {
                   <Link to="/" className="nav-link">Petitions</Link>
                 </li>
                 {
-                  !this.state.user._id ?
+                  isEmpty(this.state.user) ?
                   <li className="nav-item">
                   <Link to="/login" className="nav-link">Login</Link>
                   </li> :
-                  <li><p className="nav-greeting">Hello, { this.state.user.fname }</p></li>
+                  <li><Link to="/logout" className="nav-link">Logout</Link></li>
                 }
                 {
-                  !this.state.user._id ?
+                  isEmpty(this.state.user) ?
                   <li className="nav-item">
                     <Link to="/register" className="nav-link">Register</Link>
                   </li> :
-                  null
+                  <li><p className="nav-greeting">Hello, { this.state.user.fname }</p></li>
                 }
               </ul>
             </nav>
@@ -90,6 +99,7 @@ class App extends React.Component {
               <Route path="/petition"  />
               <Route path="/login" component = { Login } />
               <Route path="/register" component = { Register } />
+              <Route path="/logout" component = { Logout }/>
               
             </div>
             <footer className="fixed-bottom">
@@ -101,6 +111,14 @@ class App extends React.Component {
     );
   }
 
+}
+
+function isEmpty(obj) {
+  for(var key in obj) {
+      if(obj.hasOwnProperty(key))
+          return false;
+  }
+  return true;
 }
 
 export default App;

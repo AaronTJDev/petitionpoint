@@ -12,6 +12,17 @@ router.get('/:id', function(req,res) {
     }
 });
 
+router.post('/logout', function(req,res) {
+    console.log("route hit");
+    req.session.destroy( function(err) {
+        if ( err ) {
+            res.status(400).send("Error logging out.");
+        } else {
+            res.status(200).send("Logout successful.")
+        }
+    });
+})
+
 router.post('/login/u', function( req,res ){
     // Find user in the db.
     userModel.findOne({ email: req.body.email }, function( err, user){
