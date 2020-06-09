@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { userContext } from './userContext';
 import Register from './components/Account/Register';
 import Login from './components/Account/Login';
+import axios from 'axios';
+
 
 import './styles.css';
 
@@ -10,16 +12,41 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {}
+      user: {},
     }
   }
 
-  login = ( user ) => {
-    this.setState({ user: user })
+  componentDidMount(){
+    this.getSession();
   }
 
-  onComponentDidMount(){
-    this.context.foo = true;
+  getSession = ( ) => {
+    console.log("get session called");
+    var sid = document.cookie ? document.cookie
+    .split('; ')
+    .find(row => row.startsWith('sid'))
+    .split('=')[1] : null;
+
+    console.log(sid);
+
+    axios.get(`http://localhost:3000/user/${sid}`)
+      .then( res => {
+        console.log(res)
+        if ( res.data ){
+          this.setState({ user: res.data })
+        }
+      })
+      .catch( err => {
+        console.log(err);
+      });
+  }
+
+  login = ( user ) => {
+    this.setState({ user: user });
+  }
+
+  logout = () => {
+    this.setState({ user: null });
   }
 
   render(){
@@ -42,12 +69,20 @@ class App extends React.Component {
                 <li className="nav-item">
                   <Link to="/" className="nav-link">Petitions</Link>
                 </li>
-                <li className="nav-item">
+                {
+                  !this.state.user._id ?
+                  <li className="nav-item">
                   <Link to="/login" className="nav-link">Login</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/register" className="nav-link">Register</Link>
-                </li>
+                  </li> :
+                  <li><p className="nav-greeting">Hello, { this.state.user.fname }</p></li>
+                }
+                {
+                  !this.state.user._id ?
+                  <li className="nav-item">
+                    <Link to="/register" className="nav-link">Register</Link>
+                  </li> :
+                  null
+                }
               </ul>
             </nav>
             <div className="container">

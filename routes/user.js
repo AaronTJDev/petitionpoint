@@ -4,6 +4,14 @@ const bcrypt = require('bcryptjs');
 var express = require('express'),
     router = express.Router();
 
+router.get('/:id', function(req,res) {
+    // Check if server side session matches client side session.
+    if( req.session.id === req.params.id )
+    {
+        res.send(req.session.user);
+    }
+});
+
 router.post('/login/u', function( req,res ){
     // Find user in the db.
     userModel.findOne({ email: req.body.email }, function( err, user){
@@ -14,8 +22,12 @@ router.post('/login/u', function( req,res ){
         // Compare password set in body of request to password
         bcrypt.compare( req.body.passwordHash , user.passwordHash).then( function( authenticated ) {
             if ( authenticated ) {
+                // Remove password hash from user info sent to client.
                 user.set('passwordHash', undefined);
-                res.status(200).send(user);
+                // Store user info in session.
+                req.session.user = user;
+                // Set session id cookie, and send session data to client.
+                res.cookie('sid', req.session.id).status(200).send(user);
             }
             else {
                 res.status(400).send("Incorrect password or username provided."); 

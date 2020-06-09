@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import './account.css';
 import { Redirect } from "react-router-dom";
 import { userContext } from '../../userContext';
-import './account.css';
 
 export default class Login extends React.Component {
     constructor(props){
@@ -13,7 +13,7 @@ export default class Login extends React.Component {
           redirect: undefined
       }
     }
-
+    
     onChange = (e) => {
         var target = e.target;
         
@@ -37,10 +37,13 @@ export default class Login extends React.Component {
         // Send post request to login route using userInfo
         axios.post(`http://localhost:3000/user/login/u`, userInfo )
             .then( res => {
-                // Update user object within state in App.js 
-                this.context.loginUser(res.data);
-                // Redirect to home
-                this.setState({ redirect: '/' });
+                console.log(res.data);
+                if ( res.status === 200 ){
+                    // Update user object within state in App.js 
+                    this.context.loginUser(res.data);
+                    // Redirect to home
+                    this.setState({ redirect: '/' });
+                }
             }).catch( err => {
                 console.log(err);
             });

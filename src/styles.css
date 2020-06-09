@@ -17,6 +17,11 @@ nav {
   padding-top: 11px;
   transition: color 0.4s;
 }
+.nav-greeting {
+  color: #ffffff;
+  font-size: 14px;
+  padding-top: 19px;
+}
 a.nav-link:hover {
   color: #b3d9eb;
 }
