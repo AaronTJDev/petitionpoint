@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 
-const SESSION_DURATION = 60 * 60 * 1000; // 5 Minutes 
+const SESSION_DURATION = 1 * 60 * 1000; // 5 Minutes 
 
 // Determine port
 const port = process.env.PORT || 3000;
@@ -20,7 +20,8 @@ app.use(session({
     secret: 'a4f8071f-c873-4447-8ee2',
     cookie: { 
         httpOnly: false,
-        secure:false
+        secure:false,
+        maxAge: SESSION_DURATION
      },
     store: new (require('express-sessions'))({
         storage: 'mongodb',

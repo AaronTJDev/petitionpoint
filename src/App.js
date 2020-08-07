@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { userContext } from './userContext';
 import Register from './components/Account/Register';
-import Login from './components/Account/Login';
 import Logout from './components/Account/Logout';
+import Login from './components/Account/Login';
+import Edit from './components/Account/Edit';
 import axios from 'axios';
 import './styles.css';
 
@@ -19,17 +20,36 @@ class App extends React.Component {
     this.getSession();
   }
 
+  componentDidUpdate(){
+    if(this.state.user === {}){
+      this.getSession();
+    }
+  }
+
+
+  isSession = () => {
+    // Check if session id exists
+    if ( document.cookie.length > 0 ) {
+      // check for cookie titiled 'sid'
+      var sid = document.cookie
+        .split('; ')
+        .find( row => row.startsWith('sid') )
+
+      // if found, get value of sid
+      if ( sid ){
+        return sid.split('=')[1];;
+      }
+    }
+
+    return false;
+  }
+
   getSession = ( ) => {
-    console.log("get session called");
-    var sid = document.cookie ? document.cookie
-    .split('; ')
-    .find(row => row.startsWith('sid'))
-    .split('=')[1] : null;
-
-    console.log(sid);
-
-    axios.get(`http://localhost:3000/user/${sid}`)
+    // Check if session exists
+    if( this.isSession() ){
+      axios.get(`http://localhost:3000/user/${this.isSession()}`)
       .then( res => {
+        console.log(res.data);
         if ( res.data ){
           this.setState({ user: res.data })
         }
@@ -37,6 +57,9 @@ class App extends React.Component {
       .catch( err => {
         console.log(err);
       });
+    }
+
+    return false
   }
 
   login = ( user ) => {
@@ -83,14 +106,18 @@ class App extends React.Component {
                   <li className="nav-item">
                   <Link to="/login" className="nav-link">Login</Link>
                   </li> :
-                  <li><Link to="/logout" className="nav-link">Logout</Link></li>
+                  <li>
+                    <Link to="/logout" className="nav-link">Logout</Link>
+                  </li>
                 }
                 {
                   isEmpty(this.state.user) ?
                   <li className="nav-item">
                     <Link to="/register" className="nav-link">Register</Link>
                   </li> :
-                  <li><p className="nav-greeting">Hello, { this.state.user.fname }</p></li>
+                  <li className="nav-item">
+                    <Link to="/user" className="nav-link">Account</Link>
+                  </li>
                 }
               </ul>
             </nav>
@@ -100,6 +127,7 @@ class App extends React.Component {
               <Route path="/login" component = { Login } />
               <Route path="/register" component = { Register } />
               <Route path="/logout" component = { Logout }/>
+              <Route path="/user/edit" component = { Edit }/>
               
             </div>
             <footer className="fixed-bottom">
@@ -117,7 +145,9 @@ function isEmpty(obj) {
   for(var key in obj) {
       if(obj.hasOwnProperty(key))
           return false;
+          console.log('object has values');
   }
+  console.log('object is empty');
   return true;
 }
 

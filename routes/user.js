@@ -14,6 +14,7 @@ router.get('/:id', function(req,res) {
 
 router.post('/logout', function(req,res) {
     console.log("route hit");
+    console.log(req.session);
     req.session.destroy( function(err) {
         if ( err ) {
             res.status(400).send("Error logging out.");
@@ -21,12 +22,14 @@ router.post('/logout', function(req,res) {
             res.status(200).send("Logout successful.")
         }
     });
+    console.log(req.session)
 })
 
 router.post('/login/u', function( req,res ){
     // Find user in the db.
     userModel.findOne({ email: req.body.email }, function( err, user){
         if ( err ) {
+            console.log("user not found");
             res.status(404).send("User not found with the email that was provided.");
         }
 
@@ -41,6 +44,7 @@ router.post('/login/u', function( req,res ){
                 res.cookie('sid', req.session.id).status(200).send(user);
             }
             else {
+                console.log("Error encrypting password.")
                 res.status(400).send("Incorrect password or username provided."); 
             }
         });
