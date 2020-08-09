@@ -30,5 +30,36 @@ a.nav-link:hover {
 }
 footer {
   height: 48px;
-  background-color: #164156;
+  padding: 10px;
+  background-color: #ffffff;
+}
+.hero {
+  height: 400px;
+  background-image: url('img/bg-main.png');
+  background-position: left;
+  background-size: cover;
+  background-position-x: center;
+}
+#hero-text {
+  font-size: 36px;
+  font-weight: 300;
+  color: #ffffff;
+}
+#hero-highlight {
+  font-weight: 400;
+  color: #62b0d6;
+}
+.copy-article {
+  border: 0.5px solid lightgray;
+  border-bottom: none;
+  height: 360px;
+  font-size: 1.25rem;
+}
+#left {
+  background: #62b0d6;
+  color: #ffffff;
+}
+#right {
+  background: #ffa63a;
+  color: #ffffff;
 }

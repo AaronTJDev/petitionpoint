@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { userContext } from './userContext';
+import Home from './components/Home';
 import Register from './components/Account/Register';
 import Logout from './components/Account/Logout';
 import Login from './components/Account/Login';
@@ -130,8 +131,13 @@ class App extends React.Component {
               <Route path="/user/edit" component = { Edit }/>
               
             </div>
-            <footer className="fixed-bottom">
-  
+
+            <Home/>
+
+            <footer class="border-top footer text-muted">
+              <div class="container">
+                &copy; 2020 - Petition Point - <a href="example.com">Privacy</a>
+              </div>
             </footer>
           </div>
         </Router>
