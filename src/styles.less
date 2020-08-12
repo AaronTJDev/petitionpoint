@@ -3,10 +3,6 @@
 @primary-dark: darken(@primary, 40%);
 @white: lighten(@primary, 92%);
 
-* {
-    position: relative;
-}
-
 body {
     background-color: @white;
 }
@@ -42,9 +38,13 @@ a.nav-link:hover {
 }
 
 footer {
-    height:48px;
-    padding:10px;
+    border-top: 1px solid lightgray;
     background-color: @white;
+    padding:24px;
+}
+
+footer div {
+  height:24px;
 }
 
 .hero {
@@ -82,3 +82,7 @@ footer {
     background: #ffa63a;
     color: #ffffff;
   }
+
+@media screen and (max-width: 576px) {
+
+}

@@ -56,7 +56,7 @@ export default class Login extends React.Component {
         
         return (
             <div className="row account">
-                <form className="account-form">
+                <form className="account-form mt-5">
                     <h1 className="header">Login</h1>
                     <div className="form-group form-check">
                         <label htmlFor="Email">Email</label>

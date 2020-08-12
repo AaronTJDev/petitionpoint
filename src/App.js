@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { userContext } from './userContext';
 import Home from './components/Home';
 import Register from './components/Account/Register';
@@ -13,7 +13,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
+      user: {}
     }
   }
 
@@ -93,53 +93,52 @@ class App extends React.Component {
       <userContext.Provider value={ value }>
         <Router>
           <div className="App">
-            <nav>
-              <ul className="nav">
-                <img src="img/logo.png" id="logo" className="nav-item" alt="Petition Point Logo" />
-                <li className="nav-item">
-                  <Link to="/" className="nav-link">Turn-in</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/" className="nav-link">Petitions</Link>
-                </li>
-                {
-                  isEmpty(this.state.user) ?
+            <header>
+              <nav className="navbar navbar-expand-md">
+              <img src="img/logo.png" id="logo" className="navbar-brand" alt="Petition Point Logo" />
+                <ul className="nav">
                   <li className="nav-item">
-                  <Link to="/login" className="nav-link">Login</Link>
-                  </li> :
-                  <li>
-                    <Link to="/logout" className="nav-link">Logout</Link>
+                    <Link to="/" className="nav-link">Turn-in</Link>
                   </li>
-                }
-                {
-                  isEmpty(this.state.user) ?
                   <li className="nav-item">
-                    <Link to="/register" className="nav-link">Register</Link>
-                  </li> :
-                  <li className="nav-item">
-                    <Link to="/user" className="nav-link">Account</Link>
+                    <Link to="/" className="nav-link">Petitions</Link>
                   </li>
-                }
-              </ul>
-            </nav>
-            <div className="container">
-              <Route path="/turnin" />
-              <Route path="/petition"  />
-              <Route path="/login" component = { Login } />
-              <Route path="/register" component = { Register } />
-              <Route path="/logout" component = { Logout }/>
-              <Route path="/user/edit" component = { Edit }/>
-              
-            </div>
-
-            <Home/>
-
-            <footer class="border-top footer text-muted">
-              <div class="container">
-                &copy; 2020 - Petition Point - <a href="example.com">Privacy</a>
-              </div>
-            </footer>
+                  {
+                    isEmpty(this.state.user) ?
+                    <li className="nav-item">
+                    <Link to="/login" className="nav-link">Login</Link>
+                    </li> :
+                    <li>
+                      <Link to="/logout" className="nav-link">Logout</Link>
+                    </li>
+                  }
+                  {
+                    isEmpty(this.state.user) ?
+                    <li className="nav-item">
+                      <Link to="/register" className="nav-link">Register</Link>
+                    </li> :
+                    <li className="nav-item">
+                      <Link to="/user" className="nav-link">Account</Link>
+                    </li>
+                  }
+                </ul>
+              </nav>
+            </header>
+            
+            <main className="container">
+                <Switch>
+                  <Route exact path="/" component = { Home } />
+                  <Route path="/turnin" />
+                  <Route path="/petition"  />
+                  <Route path="/login" component = { Login } />
+                  <Route path="/register" component = { Register } />
+                  <Route path="/logout" component = { Logout }/>
+                  <Route path="/user/edit" component = { Edit }/>
+                </Switch>
+            </main>
+            
           </div>
+          
         </Router>
       </userContext.Provider>
     );

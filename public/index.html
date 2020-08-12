@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
     <head>
         <meta charset="utf-8" />
         <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -15,10 +15,27 @@
           user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
         -->
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>Petition Point</title>
     </head>
-  <body>
+  <body class="d-flex flex-column h-100 body">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root" class="h-100"></div>
+    <footer class="footer text-muted">
+      <div class="container">
+        &copy; 2020 - Petition Point - <a href="example.com">Privacy</a>
+      </div>
+    </footer>
+    <script>
+      $(document).ready( function () {
+        console.log('ready statement started');
+        console.log(document.body.clientWidth);
+        console.log(`${document.body.scrollHeight}px !important`);
+        if ( document.body.clientWidth < 576 ) {
+          console.log("height " + document.body.scrollHeight);
+          document.querySelector('html').style = `height:${document.body.scrollHeight}px !important`;
+        }
+      })
+    </script>
   </body>
 </html>

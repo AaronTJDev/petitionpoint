@@ -74,7 +74,7 @@ export default class Register extends React.Component {
 		}
         return (
             <div className="row account">
-                <form className="account-form">
+                <form className="account-form mt-5">
                     <h1 className="header">Register</h1>
                     <div className="form-group form-check">
                         <label htmlFor="First Name">First Name</label>
