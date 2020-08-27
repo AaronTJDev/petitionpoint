@@ -14,7 +14,7 @@ export default class Register extends React.Component {
           lname: '',
           email: '',
           password: '',
-		  vpassword: undefined,
+		  vpassword: '',
 		  redirect: undefined
       }
 	}
@@ -101,18 +101,18 @@ export default class Register extends React.Component {
 						<ul className="small">
 							{
 								! this.validateEmail(this.state.email) ?
-								<li className="text-danger">Email should look like 'john@example.com'</li> :
+								<li className="text-danger" id="email-warning">Email should look like 'john@example.com'</li> :
 								null
 							}
 							{
 								! ( this.state.password === this.state.vpassword) ?
-								<li className="text-danger">Passwords must match</li> :
+								<li className="text-danger" id="password-warning-match">Passwords must match</li> :
 								null
 							}
 							{
-								this.state.password.length < 8 ?
-								<li className="text-danger">Passwords must be atleast 8 characters.</li> :
-								null
+								// this.state.password.length < 8 ?
+								// <li className="text-danger" id="password-warning-length">Passwords must be atleast 8 characters.</li> :
+								// null
 							}
 						</ul>
 						
@@ -120,7 +120,7 @@ export default class Register extends React.Component {
                 	<div className="form-group form-check">
 						{ 
 							this.state.vpassword === this.state.password && this.validateEmail(this.state.email) && this.state.password.length >= 8 ? 
-								<input onClick={ this.onSubmit } type="submit" className="btn btn-primary" value="Register"/> :
+								<input onClick={ this.onSubmit } type="submit" className="btn btn-primary" value="Register" enabled/> :
 								<input type="submit" className="btn btn-primary" value="Register" disabled/>
 						}
                 	</div>
