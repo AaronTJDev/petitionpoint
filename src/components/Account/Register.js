@@ -78,15 +78,15 @@ export default class Register extends React.Component {
                     <h1 className="header">Register</h1>
                     <div className="form-group form-check">
                         <label htmlFor="First Name">First Name</label>
-                        <input onChange={this.onChange} type="text" name="fname" className="form-control" />
+                        <input onChange={this.onChange} type="text" name="fname" className="form-control" size="35" />
                     </div>
                     <div className="form-group form-check">
                         <label htmlFor="Last Name">Last Name</label>
-                        <input onChange={this.onChange} type="text" name="lname" className="form-control" />
+                        <input onChange={this.onChange} type="text" name="lname" className="form-control" size="35" />
                     </div>
                   	<div className="form-group form-check">
                         <label htmlFor="Email">Email</label>
-                        <input onChange={this.onChange} type="text" name="email" className="form-control" />
+                        <input onChange={this.onChange} type="text" name="email" className="form-control" size="254"/>
                   	</div>
                   	<div className="form-group form-check">
                         <label htmlFor="Password">Password</label>

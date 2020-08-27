@@ -60,7 +60,7 @@ export default class Login extends React.Component {
                     <h1 className="header">Login</h1>
                     <div className="form-group form-check">
                         <label htmlFor="Email">Email</label>
-                        <input onChange={this.onChange}  type="text" className="form-control" name="email" />
+                        <input onChange={this.onChange}  type="text" className="form-control" name="email"  size="254"/>
                     </div>
                     <div className="form-group form-check">
                         <label htmlFor="Password">Password</label>
