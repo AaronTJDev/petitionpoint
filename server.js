@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 
-const SESSION_DURATION = 1 * 60 * 1000; // 5 Minutes 
+const SESSION_DURATION = 1 * 60 * 1000; // 1 minute(s)
 
 // Determine port
 const port = process.env.PORT || 3000;
@@ -60,6 +60,8 @@ app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(port, () => {
-    console.log(`API listening on port: ${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`API listening on port: ${port}`);
+// });
+
+module.exports = app;
