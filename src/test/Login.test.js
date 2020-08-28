@@ -2,7 +2,7 @@ import React from 'react';
 import Login from '../components/Account/Login';
 import { shallow, mount } from "enzyme";
 
-describe("checking login form renders and reads form input values" , () =>{
+describe("login form renders and reads form input values" , () =>{
     test("renders login form", () => {
         shallow(<Login/>);
     });
