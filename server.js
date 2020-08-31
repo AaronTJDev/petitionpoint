@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -7,7 +8,11 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 
-const SESSION_DURATION = 1 * 60 * 1000; // 1 minute(s)
+const SESSION_KEY = process.env.SESSION_KEY;
+const SESSION_DURATION = parseInt(process.env.SESSION_DURATION);
+const DB_CONN_URL = process.env.LOCAL_DB_CONN_URL;
+
+console.log(process.env);
 
 // Determine port
 const port = process.env.PORT || 3000;
@@ -17,7 +22,7 @@ const app = express();
 app.use(session({
     resave: false,
     saveUninitialized:true,
-    secret: 'a4f8071f-c873-4447-8ee2',
+    secret: SESSION_KEY,
     cookie: { 
         httpOnly: false,
         secure:false,
@@ -42,7 +47,7 @@ app.use(logger('dev'))
 
 
 // Open connection to db
-mongoose.connect(`mongodb://localhost:27017/petitionpoint`, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(DB_CONN_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Import Routes
 const user = require('./routes/user');

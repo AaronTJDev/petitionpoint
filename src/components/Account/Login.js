@@ -69,6 +69,8 @@ export default class Login extends React.Component {
                         <input onClick={ this.handleClick } type="submit" className="btn btn-primary" value="Login"/>
                     </div>
                 </form>
+                <div className="login-img">
+                </div>
             </div>
         );
     }  

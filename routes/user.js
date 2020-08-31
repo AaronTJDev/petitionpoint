@@ -9,6 +9,8 @@ router.get('/:id', function(req,res) {
     if( req.session.id === req.params.id )
     {
         res.send(req.session.user);
+    } else {
+        res.status(400).send("Session not found.")
     }
 });
 

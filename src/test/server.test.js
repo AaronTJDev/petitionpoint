@@ -9,13 +9,19 @@ const _s = supertest(app);
 
 describe("server is running", () => {
     test("get home page", async done => {
-        const res = await _s.get('/');
-
-        expect(res.status).toBe(200);
+        _s.get('/')
+            .expect(200)
         done();
     });
 });
 
-describe("endpoints are working", () => {
+describe("controllers behaves as expected", () => {
+    test("user/id route sends 400 status code if there is no id", async done => {
+        const res = await _s.get('/user/5343523');
+
+        expect(res.status).toBe(400);
+        expect(res.text).toBe("Session not found.");
+        done();4
+    });
 
 });
