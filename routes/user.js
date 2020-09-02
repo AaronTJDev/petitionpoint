@@ -8,7 +8,7 @@ router.get('/:id', function(req,res) {
     // Check if server side session matches client side session.
     if( req.session.id === req.params.id )
     {
-        res.send(req.session.user);
+        res.status(200).send(req.session.user);
     } else {
         res.status(400).send("Session not found.")
     }
@@ -27,7 +27,7 @@ router.post('/logout', function(req,res) {
     console.log(req.session)
 })
 
-router.post('/login/u', function( req,res ){
+router.post('/login/', function( req,res ){
     // Find user in the db.
     userModel.findOne({ email: req.body.email }, function( err, user){
         if ( err ) {
