@@ -110,9 +110,9 @@ export default class Register extends React.Component {
 								null
 							}
 							{
-								// this.state.password.length < 8 ?
-								// <li className="text-danger" id="password-warning-length">Passwords must be atleast 8 characters.</li> :
-								// null
+								this.state.password != null && this.state.password.length < 8 ?
+								<li className="text-danger" id="password-warning-length">Passwords must be atleast 8 characters.</li> :
+								null
 							}
 						</ul>
 						

@@ -1,5 +1,4 @@
-const userModel = require('../models/User')
-const bcrypt = require('bcryptjs');
+const userModel = require('../models/User');
 
 var express = require('express'),
     router = express.Router();
@@ -36,20 +35,20 @@ router.post('/login/', function( req,res ){
         }
 
         // Compare password set in body of request to password
-        bcrypt.compare( req.body.passwordHash , user.passwordHash).then( function( authenticated ) {
-            if ( authenticated ) {
-                // Remove password hash from user info sent to client.
-                user.set('passwordHash', undefined);
-                // Store user info in session.
-                req.session.user = user;
-                // Set session id cookie, and send session data to client.
-                res.cookie('sid', req.session.id).status(200).send(user);
-            }
-            else {
-                console.log("Error encrypting password.")
-                res.status(400).send("Incorrect password or username provided."); 
-            }
-        });
+        var authenticated = req.body.passwordHash === user.passwordHash;
+
+        if ( authenticated ) {
+            // Remove password hash from user info sent to client.
+            user.set('passwordHash', undefined);
+            // Store user info in session.
+            req.session.user = user;
+            // Set session id cookie, and send session data to client.
+            res.cookie('sid', req.session.id).status(200).send(user);
+        }
+        else {
+            console.log("Error encrypting password.")
+            res.status(400).send("Incorrect password or username provided."); 
+        }
     });
 });
 
@@ -62,26 +61,17 @@ router.post('/create/:id', function( req,res ){
 
     // Hash password
     const salt = 8;
-    var hashed = ''
-    bcrypt.hash(user.passwordHash, salt, function( err, hash ){
-        if(err){
-            res.status(500).send();
+
+    // Save user to db
+    user.save( err => {
+        if (err) {
+            console.log(`${err.name} : ${err.errmsg}`)
+            res.status(400).send(`${err.name} : ${err.errmsg}`);
         }
-
-        console.log('hashing password')
-        user.passwordHash = hash;
-
-        // Save user to db
-        user.save( err => {
-            if (err) {
-                console.log(`${err.name} : ${err.errmsg}`)
-                res.status(400).send(`${err.name} : ${err.errmsg}`);
-            }
-            else { 
-                console.log("saving user to database");
-                res.status(201).send("Account successfully created.")
-            }
-        });
+        else { 
+            console.log("saving user to database");
+            res.status(201).send("Account successfully created.")
+        }
     });
 });
 

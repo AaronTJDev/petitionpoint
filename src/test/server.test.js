@@ -90,7 +90,7 @@ describe("user controller behaves as expected", () => {
             .expect(200)
             .end(function(err, res) {
                 if (err) return done(err);
-                expect(res.body).toStrictEqual({fname: 'Jackie', lname: 'Doe', email: 'jackiedoe@email.com', _id: "5f4ff11e0ec7c1fe6bd0ebe2", roles: [], turnins: []})
+                expect(res.body).toStrictEqual({fname: 'Jackie', lname: 'Doe', email: 'jackiedoe@email.com', _id: "5f50846eec6b875617c357a4", roles: [], turnins: []})
                 done();
             });;
     })
