@@ -15,8 +15,9 @@ describe("server is running", () => {
 describe("user controller behaves as expected", () => {
     beforeEach(async () => {
         const url = process.env.TEST_DB_CONN_URL;
-        await mongoose.connect(url, { useNewUrlParser: true });
-        await userModel.remove({ fname: 'John' });  
+        await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+        await userModel.remove({ fname: 'John' });
+        await userModel.remove({ fname: 'Jackie' });
     })
 
 
@@ -78,19 +79,35 @@ describe("user controller behaves as expected", () => {
             });
     });
 
-    test("user/login returns an object", async done => {
-        const user = {
-            email: 'jackiedoe@email.com',
-            passwordHash: 'bibigo90'
-        }
-        
-        _s.post('/user/login/')
+    test("user/authenticate returns an object", async done => {
+        // Add user to database
+        var user = {
+			_id: mongoose.Types.ObjectId(),
+			fname: 'Jackie',
+          	lname: 'Doe',
+          	email: 'jackiedoe@email.com',
+          	passwordHash: 'bibigo90',
+		};
+
+        _s
+            .post('/user/create/12345')
+            .send(user)
+            .set('Accept', 'application/json')
+            .end(function(err, res) {
+                if (err) return done(err);
+                done();
+            });
+
+        _s.post('/user/authenticate')
             .send(user)
             .set('Accept', 'application/json')
             .expect(200)
             .end(function(err, res) {
-                if (err) return done(err);
-                expect(res.body).toStrictEqual({fname: 'Jackie', lname: 'Doe', email: 'jackiedoe@email.com', _id: "5f50846eec6b875617c357a4", roles: [], turnins: []})
+                if (err) {
+                    return done(err);
+                } 
+
+                expect(res.body).toMatchObject({fname: 'Jackie', lname: 'Doe', email: 'jackiedoe@email.com'})
                 done();
             });;
     })

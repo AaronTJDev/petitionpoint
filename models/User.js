@@ -10,7 +10,11 @@ let userSchema = new Schema(
         passwordHash : { type: String, required: true },
         validity: { type: Number },
         roles: { type: Array },
-        turnins: { type: Array }
+        turnins: { 
+            turnin: {
+                
+            }
+        }
     },
     { collection: 'users'}
 )

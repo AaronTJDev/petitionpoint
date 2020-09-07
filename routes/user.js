@@ -23,10 +23,10 @@ router.post('/logout', function(req,res) {
             res.status(200).send("Logout successful.")
         }
     });
-    console.log(req.session)
 })
 
-router.post('/login/', function( req,res ){
+router.post('/authenticate', function( req,res ){
+    var authenticated = '';
     // Find user in the db.
     userModel.findOne({ email: req.body.email }, function( err, user){
         if ( err ) {
@@ -34,8 +34,12 @@ router.post('/login/', function( req,res ){
             res.status(404).send("User not found with the email that was provided.");
         }
 
+        console.log(`LINE 35\n\n\ ${user}`);
+
         // Compare password set in body of request to password
-        var authenticated = req.body.passwordHash === user.passwordHash;
+        if( req.body ) {
+            authenticated = req.body.passwordHash === user.passwordHash;
+        }
 
         if ( authenticated ) {
             // Remove password hash from user info sent to client.
@@ -43,10 +47,10 @@ router.post('/login/', function( req,res ){
             // Store user info in session.
             req.session.user = user;
             // Set session id cookie, and send session data to client.
-            res.cookie('sid', req.session.id).status(200).send(user);
+            res.status(200).cookie('sid', req.session.id).send(user);
         }
         else {
-            console.log("Error encrypting password.")
+            console.log("Error with login: \n" + err + "\n");
             res.status(400).send("Incorrect password or username provided."); 
         }
     });

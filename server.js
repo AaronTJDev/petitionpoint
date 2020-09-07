@@ -47,7 +47,7 @@ app.use(logger('dev'))
 
 
 // Open connection to db
-mongoose.connect(DB_CONN_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(DB_CONN_URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 // Import Routes
 const user = require('./routes/user');

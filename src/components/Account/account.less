@@ -23,7 +23,7 @@
     width:100%;
 }
 
-.login-img {
+#login-img {
     display: inline-block;
     position: relative;
     height: 280px;
@@ -35,31 +35,47 @@
     bottom: -16px;
 }
 
+#register-img {
+    display: inline-block;
+    position: relative;
+    height: 400px;
+    width: 540px;
+    background: url(../../img/register.svg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: -16px;
+}
+
 
 // Small devices (landscape phones, 576px and up)
 @media (max-width: 576px) { 
-    .login-img {
+    #login-img {
         display:none;
     }
  }
 
 // Medium devices (tablets, 768px and up)
 @media (max-width: 768px) { 
-    .login-img {
+    #login-img {
+        display:none;
+    }
+
+    #register-img {
         display:none;
     }
  }
 
 // Large devices (desktops, 992px and up)
 @media (max-width: 992px) { 
-    .login-img {
+    #login-img {
         left:8%;
     }
  }
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 993px) {
-    .login-img {
+    #login-img {
         left:16%;
     }
 }

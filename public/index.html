@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -18,7 +18,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>Petition Point</title>
     </head>
-  <body class="d-flex flex-column h-100 body">
+  <body class="d-flex flex-column body">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root" class="h-100"></div>
     <footer class="footer text-muted">
@@ -27,14 +27,9 @@
       </div>
     </footer>
     <script>
-      $(document).ready( function () {
-        console.log('ready statement started');
-        console.log(document.body.clientWidth);
-        console.log(`${document.body.scrollHeight}px !important`);
-        if ( document.body.clientWidth < 576 ) {
-          console.log("height " + document.body.scrollHeight);
-          document.querySelector('html').style = `height:${document.body.scrollHeight}px !important`;
-        }
+      $(window).on( 'load', function () {
+        var pageHeight = parseInt($('#root').css('height')) * 1.5;
+        $('body').css('height', `${pageHeight}px`);
       })
     </script>
   </body>

@@ -10,7 +10,8 @@ export default class Login extends React.Component {
       this.state = {
           email: '',
           password: '',
-          redirect: undefined
+          redirect: undefined,
+          failedLogin: null
       }
     }
     
@@ -35,7 +36,7 @@ export default class Login extends React.Component {
         };
         
         // Send post request to login route using userInfo
-        axios.post(`http://localhost:3000/user/login/`, userInfo )
+        axios.post(`http://localhost:3000/user/authenticate`, userInfo )
             .then( res => {
                 if ( res.status === 200 ){
                     // Update user object within state in App.js 
@@ -44,6 +45,7 @@ export default class Login extends React.Component {
                     this.setState({ redirect: '/' });
                 }
             }).catch( err => {
+                this.setState({ failedLogin: <p className="text-danger ml-4" id="password-warning-length">Username or password provided was incorrect.</p> })
                 console.log(err);
             });
 	}
@@ -68,9 +70,13 @@ export default class Login extends React.Component {
                     <div className="form-group form-check">
                         <input onClick={ this.handleClick } type="submit" className="btn btn-primary" value="Login"/>
                     </div>
+                    {
+                        this.state.failedLogin ? 
+                            this.state.failedLogin:
+                            null
+                    }
                 </form>
-                <div className="login-img">
-                </div>
+                <div id="login-img"></div>
             </div>
         );
     }  

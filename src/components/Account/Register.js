@@ -27,7 +27,7 @@ export default class Register extends React.Component {
 	}
 
     onChange = (e) => {
-        var target = e.target;
+		var target = e.target;
         
         if ( target.name === 'fname' ){
             this.setState({ fname: target.value });
@@ -61,7 +61,17 @@ export default class Register extends React.Component {
 	}
 
 	validateEmail = (mail) => {
-		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+		const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if (emailRegex.test(mail))
+		{
+			return true
+		}
+			return false
+	}
+
+	validateName = (name) => {
+		const nameRegex = /^[a-z]+$/i;
+		if (nameRegex.test(name))
 		{
 			return true
 		}
@@ -105,6 +115,16 @@ export default class Register extends React.Component {
 								null
 							}
 							{
+								! this.validateName(this.state.fname) ?
+								<li className="text-danger" id="email-warning">First name can only contain alphabetic characters.</li> :
+								null
+							}
+							{
+								! this.validateName(this.state.lname) ?
+								<li className="text-danger" id="email-warning">Last name can only contain alphabetic characters.</li> :
+								null
+							}
+							{
 								! ( this.state.password === this.state.vpassword) ?
 								<li className="text-danger" id="password-warning-match">Passwords must match</li> :
 								null
@@ -119,12 +139,13 @@ export default class Register extends React.Component {
 					}
                 	<div className="form-group form-check">
 						{ 
-							this.state.vpassword === this.state.password && this.validateEmail(this.state.email) && this.state.password.length >= 8 ? 
-								<input onClick={ this.onSubmit } type="submit" className="btn btn-primary" value="Register" enabled/> :
+							this.state.vpassword === this.state.password && this.validateEmail(this.state.email) && this.state.password.length >= 8 && this.validateName(this.state.fname) && this.validateName(this.state.lname) ? 
+								<input onClick={ this.onSubmit } type="submit" className="btn btn-primary" value="Register"/> :
 								<input type="submit" className="btn btn-primary" value="Register" disabled/>
 						}
                 	</div>
               	</form>
+				<div id="register-img"></div> 
           	</div>
     	);
     }  
