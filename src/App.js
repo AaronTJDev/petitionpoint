@@ -103,7 +103,7 @@ class App extends React.Component {
           <div className="App">
             <header>
               <nav className="navbar navbar-expand-md">
-              <img src="img/logo.png" id="logo" className="navbar-brand" alt="Petition Point Logo" />
+                <Link to="/" className="nav-item"><img src="img/logo.png" id="logo" className="navbar-brand" alt="Petition Point Logo" /></Link>
                 <ul className="nav">
                   <li className="nav-item">
                     <Link to="/" className="nav-link">Turn-in</Link>
@@ -144,8 +144,8 @@ class App extends React.Component {
                   <Route path="/user/edit" component = { Edit }/>
                 </Switch>
             </main>
-            <footer class="footer text-muted">
-              <div class="container">
+            <footer className="footer text-muted">
+              <div className="container">
                 &copy; 2020 - Petition Point - <a href="example.com">Privacy</a>
               </div>
             </footer>
