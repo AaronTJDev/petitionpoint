@@ -63,3 +63,47 @@ footer div {
   background: #ffa63a;
   color: #ffffff;
 }
+#menu-icon {
+  color: #ffffff;
+  font-size: 2rem;
+}
+#slide-nav {
+  padding: 0;
+}
+#slide-menu {
+  background-color: #164156;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: -1500px;
+  z-index: 1000;
+  opacity: 0;
+  text-align: center;
+}
+#slide-menu a {
+  font-size: 2rem;
+  padding-left: 0;
+  padding-right: 0;
+  transition: color 0.4s;
+}
+#slide-menu a:hover {
+  color: teal;
+}
+#slide-menu-footer {
+  color: white;
+  text-align: center;
+  background-color: teal;
+  opacity: 1;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transition: background-color 0.4s;
+}
+#slide-menu-footer:hover {
+  background-color: #b3d9eb;
+}
+@media screen and (max-width: 576px) {
+  #desktop-nav {
+    display: none;
+  }
+}

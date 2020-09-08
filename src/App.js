@@ -14,7 +14,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {}
+      user: {},
+      menuToggled: false 
     }
   }
 
@@ -50,6 +51,15 @@ class App extends React.Component {
     }
 
     return false;
+  }
+
+  toggleMenu = () => {
+    this.setState({menuToggled: !this.state.menuToggled})
+    // Animation that makes menu slide out
+      $('#slide-menu').animate({
+        opacity:0.95,
+        left: this.state.menuToggled ? "-=1500" : "+=1500"
+      });
   }
 
   getSession = ( ) => {
@@ -104,7 +114,7 @@ class App extends React.Component {
             <header>
               <nav className="navbar navbar-expand-md">
                 <Link to="/" className="nav-item"><img src="img/logo.png" id="logo" className="navbar-brand" alt="Petition Point Logo" /></Link>
-                <ul className="nav">
+                <ul className="nav"  id="desktop-nav">
                   <li className="nav-item">
                     <Link to="/" className="nav-link">Turn-in</Link>
                   </li>
@@ -130,6 +140,40 @@ class App extends React.Component {
                     </li>
                   }
                 </ul>
+                <div className="h-100" onClick={this.toggleMenu}>
+                  <i className="fas fa-bars p-2" id="menu-icon"></i>
+                </div>
+                <div className="h-100" id="slide-menu">
+                  <ul className="menu-nav"  id="slide-nav">
+                    <li className="nav-item">
+                      <Link to="/" className="nav-link mt-4">Turn-in</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/" className="nav-link">Petitions</Link>
+                    </li>
+                    {
+                      isEmpty(this.state.user) ?
+                      <li className="nav-item">
+                      <Link to="/login" className="nav-link">Login</Link>
+                      </li> :
+                      <li>
+                        <Link to="/logout" className="nav-link">Logout</Link>
+                      </li>
+                    }
+                    {
+                      isEmpty(this.state.user) ?
+                      <li className="nav-item">
+                        <Link to="/register" className="nav-link">Register</Link>
+                      </li> :
+                      <li className="nav-item">
+                        <Link to="/user" className="nav-link">Account</Link>
+                      </li>
+                    }
+                  </ul>
+                  <div id="slide-menu-footer" onClick={this.toggleMenu}>
+                    <h1 className="p-4">Close</h1>
+                  </div>
+                </div>
               </nav>
             </header>
             
