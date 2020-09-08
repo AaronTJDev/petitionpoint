@@ -17,8 +17,8 @@
 #login-img {
   display: inline-block;
   position: relative;
-  height: 280px;
-  width: 320px;
+  height: 400px;
+  width: 540px;
   background: url(../../img/login.svg);
   background-position: bottom;
   background-repeat: no-repeat;

@@ -145,7 +145,7 @@ export default class Register extends React.Component {
 						}
                 	</div>
               	</form>
-				<div id="register-img"></div> 
+				<div id="register-img" className="mx-5"></div> 
           	</div>
     	);
     }  

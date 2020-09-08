@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { userContext } from './userContext';
 import Home from './components/Home';
@@ -17,8 +18,15 @@ class App extends React.Component {
     }
   }
 
+  onPageChange(){
+    $(window).on( 'load', function () {
+      var pageHeight = document.body.scrollHeight < 900 ? parseInt($('#root').css('height')) * 1.33 : parseInt($('#root').css('height'));
+      $('body').css('height', `${pageHeight}px`);
+    });
+  }
+
   componentDidMount(){
-    this.getSession();
+      this.getSession();
   }
 
   componentDidUpdate(){
@@ -26,7 +34,6 @@ class App extends React.Component {
       this.getSession();
     }
   }
-
 
   isSession = () => {
     // Check if session id exists
@@ -82,6 +89,7 @@ class App extends React.Component {
   }
 
   render(){
+
     // Value object to be consumed by context consumers.
     const value = {
       user: this.state.user,
@@ -136,9 +144,13 @@ class App extends React.Component {
                   <Route path="/user/edit" component = { Edit }/>
                 </Switch>
             </main>
-            
+            <footer class="footer text-muted">
+              <div class="container">
+                &copy; 2020 - Petition Point - <a href="example.com">Privacy</a>
+              </div>
+            </footer>
           </div>
-          
+
         </Router>
       </userContext.Provider>
     );
