@@ -58,7 +58,7 @@ class App extends React.Component {
     // Animation that makes menu slide out
       $('#slide-menu').animate({
         opacity:0.95,
-        left: this.state.menuToggled ? "-=1500" : "+=1500"
+        left: this.state.menuToggled ? "-=750" : "+=750"
       });
   }
 
@@ -146,27 +146,27 @@ class App extends React.Component {
                 <div className="h-100" id="slide-menu">
                   <ul className="menu-nav"  id="slide-nav">
                     <li className="nav-item">
-                      <Link to="/" className="nav-link mt-4">Turn-in</Link>
+                      <Link to="/" onClick={this.toggleMenu} className="nav-link mt-4">Turn-in</Link>
                     </li>
                     <li className="nav-item">
-                      <Link to="/" className="nav-link">Petitions</Link>
+                      <Link to="/" onClick={this.toggleMenu} className="nav-link">Petitions</Link>
                     </li>
                     {
                       isEmpty(this.state.user) ?
                       <li className="nav-item">
-                      <Link to="/login" className="nav-link">Login</Link>
+                      <Link to="/login" onClick={this.toggleMenu} className="nav-link">Login</Link>
                       </li> :
                       <li>
-                        <Link to="/logout" className="nav-link">Logout</Link>
+                        <Link to="/logout" onClick={this.toggleMenu} className="nav-link">Logout</Link>
                       </li>
                     }
                     {
                       isEmpty(this.state.user) ?
                       <li className="nav-item">
-                        <Link to="/register" className="nav-link">Register</Link>
+                        <Link to="/register" onClick={this.toggleMenu} className="nav-link">Register</Link>
                       </li> :
                       <li className="nav-item">
-                        <Link to="/user" className="nav-link">Account</Link>
+                        <Link to="/user" onClick={this.toggleMenu} className="nav-link">Account</Link>
                       </li>
                     }
                   </ul>

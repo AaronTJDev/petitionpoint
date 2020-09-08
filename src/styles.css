@@ -44,6 +44,7 @@ footer div {
   font-size: 36px;
   font-weight: 300;
   color: #ffffff;
+  text-align: left;
 }
 #hero-highlight {
   font-weight: 400;
@@ -75,7 +76,7 @@ footer div {
   width: 100%;
   position: fixed;
   bottom: 0;
-  left: -1500px;
+  left: -750px;
   z-index: 1000;
   opacity: 0;
   text-align: center;
