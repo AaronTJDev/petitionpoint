@@ -15,38 +15,24 @@
   width: 100%;
 }
 #login-img {
-  display: inline-block;
-  position: relative;
-  height: 400px;
-  width: 540px;
   background: url(../../img/login.svg);
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: contain;
-  bottom: -16px;
 }
 #register-img {
-  display: inline-block;
-  position: relative;
-  height: 400px;
-  width: 540px;
   background: url(../../img/register.svg);
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: contain;
-  bottom: -16px;
 }
-@media (max-width: 576px) {
-  #login-img {
-    display: none;
-  }
+.account-drawing {
+  position: relative;
+  display: inline-block;
+  background-position: bottom !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  bottom: -16px;
+  height: 18rem;
+  width: 24rem;
 }
 @media (max-width: 768px) {
-  #login-img {
-    display: none;
-  }
-  #register-img {
-    display: none;
+  .account-drawing {
+    display: none !important;
   }
 }
 @media (max-width: 992px) {

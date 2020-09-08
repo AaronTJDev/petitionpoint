@@ -1,6 +1,7 @@
 @primary: #62b0d6;
 @primary-light: lighten(@primary, 20%);
 @primary-dark: darken(@primary, 40%);
+@secondary: #ffa63a;
 @white: lighten(@primary, 92%);
 
 body {
@@ -80,7 +81,7 @@ footer div {
   }
   
   #right {
-    background: #ffa63a;
+    background: @secondary;
     color: #ffffff;
   }
 
@@ -130,7 +131,7 @@ footer div {
     #slide-menu-footer {
       color: white;
       text-align: center;
-      background-color: teal;
+      background-color: @secondary;
       opacity: 1;
       position: absolute;
       bottom: 0;
@@ -141,4 +142,19 @@ footer div {
     #slide-menu-footer:hover {
       background-color: @primary-light;
     }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) { 
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (max-width: 992px) { 
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 993px) {
+
 }

@@ -4,7 +4,7 @@ function Home() {
     return (
         <div className="container">
             <section className="hero row text-center">
-                <h1 id="hero-text" className="col-6 mt-auto mb-auto">MAKING<br />PETITIONING<br /><span id="hero-highlight">SIMPLE</span></h1>
+                <h1 id="hero-text" className="pl-5 col-6 mt-auto mb-auto">MAKING<br />PETITIONING<br /><span id="hero-highlight">SIMPLE</span></h1>
             </section>
             <section className="copy row">
                 <article className="copy-article col-md-6 p-0 d-inline-block" id="coordinator">
