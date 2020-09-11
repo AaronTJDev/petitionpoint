@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const turninSchema = require('./User');
 
-let userSchema = new Schema(
+const userSchema = new Schema(
     {
         _id: mongoose.Schema.Types.ObjectId,
         fname: { type: String, required: true, maxlength:35 },
@@ -10,11 +11,7 @@ let userSchema = new Schema(
         passwordHash : { type: String, required: true },
         validity: { type: Number },
         roles: { type: Array },
-        turnins: { 
-            turnin: {
-                
-            }
-        }
+        turnins: [turninSchema]
     },
     { collection: 'users'}
 )

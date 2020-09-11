@@ -90,6 +90,6 @@ describe("register button is enabled/disabled based on form input", () => {
             target: { name: 'vpassword', value: '#5559alg' }
         });
 
-        expect(wrapper.find('[value="Register"]').props().enabled).toEqual(true);
+        expect(wrapper.find('[value="Register"]').props().disabled).toEqual(undefined);
     });
 });

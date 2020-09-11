@@ -13,6 +13,8 @@ export default class Edit extends React.Component {
           redirect: undefined
       }
     }
+
+
     
     onChange = (e) => {
         var target = e.target;
@@ -59,30 +61,32 @@ export default class Edit extends React.Component {
         }
         
         return (
-            <div className="row account">
-                <form className="account-form">
-                    <h1 className="header">Edit</h1>
-                    <div className="form-group form-check">
-                        <label htmlFor="First Name">First Name</label>
-                        <input onChange={this.onChange} type="text" name="fname" className="form-control" />
+
+            <userContext.Consumer>
+                { context => (
+                    <div className="row account">
+                        <form className="account-form">
+                            <h1 className="header">Account Information</h1>
+                                <div className="form-group form-check">
+                                    <label htmlFor="First Name">First Name</label>
+                                    <input onChange={this.onChange} value={context.user.fname} type="text" name="fname" className="form-control" disabled />
+                                </div>
+                                <div className="form-group form-check">
+                                    <label htmlFor="Last Name">Last Name</label>
+                                    <input onChange={this.onChange} value={context.user.lname} type="text" name="lname" className="form-control" disabled/>
+                                </div>
+                                <div className="form-group form-check">
+                                    <label htmlFor="Email">Email</label>
+                                    <input onChange={this.onChange}  value={context.user.email} type="text" className="form-control" name="email" disabled/>
+                                </div>
+                                <div className="form-group form-check">
+                                    <input onClick={ this.handleClick } type="submit" className="btn btn-primary" value="Edit"/>
+                                </div>
+                        </form>
                     </div>
-                    <div className="form-group form-check">
-                        <label htmlFor="Last Name">Last Name</label>
-                        <input onChange={this.onChange} type="text" name="lname" className="form-control" />
-                    </div>
-                    <div className="form-group form-check">
-                        <label htmlFor="Email">Email</label>
-                        <input onChange={this.onChange}  type="text" className="form-control" name="email" />
-                    </div>
-                    <div className="form-group form-check">
-                        <label htmlFor="Password">Password</label>
-                        <input onChange={this.onChange}  type="password" className="form-control" name="password" />
-                    </div>
-                    <div className="form-group form-check">
-                        <input onClick={ this.handleClick } type="submit" className="btn btn-primary" value="Edit"/>
-                    </div>
-                </form>
-            </div>
+                )}
+                
+            </userContext.Consumer>
         );
     }  
 }
