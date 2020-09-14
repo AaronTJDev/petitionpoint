@@ -6,7 +6,6 @@ import { userContext } from '../../userContext';
 class MobileMenu extends React.Component {
   render(){
     return (
-          <nav className="navbar navbar-expand-md">
             <div className="h-100" id="slide-menu">
               <ul className="menu-nav"  id="slide-nav">
                 <li className="nav-item">
@@ -38,7 +37,6 @@ class MobileMenu extends React.Component {
                 <h1 className="p-4">Close</h1>
               </div>
             </div>
-          </nav>
     );
   }
 }

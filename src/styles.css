@@ -8,9 +8,17 @@ nav {
   width: 12rem;
   padding: 12px;
 }
+#account-dropdown button {
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+#account-dropdown a {
+  color: #164156;
+  font-size: 1rem;
+}
 .nav-link {
   color: #ffffff;
-  font-size: 22px;
+  font-size: 1.5rem;
   padding-top: 11px;
   transition: color 0.4s;
 }
@@ -23,7 +31,7 @@ a.nav-link:hover {
   color: #b3d9eb;
 }
 #link-first {
-  padding-left: 54px;
+  padding-left: 2rem;
 }
 footer {
   border-top: 1px solid lightgray;

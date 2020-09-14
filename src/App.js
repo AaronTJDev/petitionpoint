@@ -61,7 +61,7 @@ class App extends React.Component {
       .then( res => {
         console.log(res.data);
         if ( res.data ){
-          this.setState({ user: res.data })
+          this.setState({ user: res.data, authenticated: true })
         }
       })
       .catch( err => {
