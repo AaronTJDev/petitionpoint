@@ -13,6 +13,26 @@ router.get('/:id', function(req,res) {
     }
 });
 
+router.post('/create/:id', function( req,res ){
+    // Format post data as a user model
+    let user = new userModel(req.body);
+
+    // Assign standard role
+    user.roles.push("circulator");
+
+    // Save user to db
+    user.save( err => {
+        if (err) {
+            console.log(`${err.name} : ${err.errmsg}`)
+            res.status(400).send(`${err.name} : ${err.errmsg}`);
+        }
+        else { 
+            console.log("saving user to database");
+            res.status(201).send("Account successfully created.")
+        }
+    });
+});
+
 router.post('/logout', function(req,res) {
     console.log("route hit");
     console.log(req.session);
@@ -26,6 +46,7 @@ router.post('/logout', function(req,res) {
 })
 
 router.post('/authenticate', function( req,res ){
+    console.log("authenticating");
     var authenticated = '';
     // Find user in the db.
     userModel.findOne({ email: req.body.email }, function( err, user){
@@ -56,28 +77,7 @@ router.post('/authenticate', function( req,res ){
     });
 });
 
-router.post('/create/:id', function( req,res ){
-    // Format post data as a user model
-    let user = new userModel(req.body);
 
-    // Assign standard role
-    user.roles.push("circulator");
-
-    // Hash password
-    const salt = 8;
-
-    // Save user to db
-    user.save( err => {
-        if (err) {
-            console.log(`${err.name} : ${err.errmsg}`)
-            res.status(400).send(`${err.name} : ${err.errmsg}`);
-        }
-        else { 
-            console.log("saving user to database");
-            res.status(201).send("Account successfully created.")
-        }
-    });
-});
 
 router.put('/edit/:id', function( req,res ){
     console.log("update route hit")

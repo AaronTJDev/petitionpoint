@@ -1,6 +1,5 @@
 import React from 'react';
-import $ from 'jquery'
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { userContext } from '../../userContext';
 
 class MobileMenu extends React.Component {

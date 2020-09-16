@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { userContext } from './userContext';
 import Home from './components/Home';
 import Menu from './components/Menu/Menu';

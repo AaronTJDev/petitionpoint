@@ -1,6 +1,5 @@
 import React from 'react';
-import $ from 'jquery'
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { userContext } from '../../userContext';
 
 class StandardMenu extends React.Component {
@@ -16,9 +15,9 @@ class StandardMenu extends React.Component {
               <li className="nav-item">
                 <Link to="/" className="nav-link">Petitions</Link>
               </li>
-              <div class="dropdown" id="account-dropdown">
+              <div className="dropdown" id="account-dropdown">
                 <button type="button" className="btn fas fa-user-circle pt-3"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu my-2" aria-labelledby="dropdownMenuButton">
+                <div className="dropdown-menu my-2" aria-labelledby="dropdownMenuButton">
                   {
                     this.props.authenticated ?
                         <Link to="/logout" className="dropdown-item nav-link"  onClick={this.props.toggleMenu}>Logout</Link>

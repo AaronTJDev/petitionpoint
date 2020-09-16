@@ -23,8 +23,10 @@ userSchema.pre('save', function ( next ){
         return next();
     } 
 
+    // salt round for hashing
     const salt = 8;
     
+    // Hash password
     bcrypt.hash(user.passwordHash, salt, function( err, hash ){
         if(err){
             res.status(500).send();

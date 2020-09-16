@@ -38,14 +38,4 @@ class Menu extends React.Component {
 
 }
 
-function isEmpty(obj) {
-  for(var key in obj) {
-      if(obj.hasOwnProperty(key))
-          return false;
-          console.log('object has values');
-  }
-  console.log('object is empty');
-  return true;
-}
-
 export default Menu;
