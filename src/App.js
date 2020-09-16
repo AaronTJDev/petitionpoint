@@ -4,10 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { userContext } from './userContext';
 import Home from './components/Home';
 import Menu from './components/Menu/Menu';
-import Register from './components/Account/Register';
-import Logout from './components/Account/Logout';
-import Login from './components/Account/Login';
-import Edit from './components/Account/Edit';
+import Account from './components/Account/Account';
 import axios from 'axios';
 import './styles.css';
 
@@ -109,11 +106,8 @@ class App extends React.Component {
                 <Switch>
                   <Route exact path="/" component = { Home } />
                   <Route path="/turnin" />
-                  <Route path="/petition"  />
-                  <Route path="/login" component = { Login } />
-                  <Route path="/register" component = { Register } />
-                  <Route path="/logout" component = { Logout }/>
-                  <Route path="/edit" component = { Edit }/>
+                  <Route path="/petition"/>
+                  <Account/>
                 </Switch>
             </main>
             <footer className="footer text-muted">

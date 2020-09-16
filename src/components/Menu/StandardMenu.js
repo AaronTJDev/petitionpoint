@@ -15,6 +15,9 @@ class StandardMenu extends React.Component {
               <li className="nav-item">
                 <Link to="/" className="nav-link">Petitions</Link>
               </li>
+              <li className="nav-item">
+                <Link to="/" className="nav-link">Circulators</Link>
+              </li>
               <div className="dropdown" id="account-dropdown">
                 <button type="button" className="btn fas fa-user-circle pt-3"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                 <div className="dropdown-menu my-2" aria-labelledby="dropdownMenuButton">

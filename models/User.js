@@ -11,7 +11,8 @@ const userSchema = new Schema(
         passwordHash : { type: String, required: true },
         validity: { type: Number },
         roles: { type: Array },
-        turnins: [turninSchema]
+        turnins: [turninSchema],
+        createdAt: { type: Date, default: Date.now }
     },
     { collection: 'users'}
 )
