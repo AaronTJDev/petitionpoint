@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 export default class Register extends React.Component {
     constructor(props){
-      super(props);
+      super();
       this.state = {
           fname: '',
           lname: '',
@@ -54,6 +54,7 @@ export default class Register extends React.Component {
 		};
 
 		axios.post(`http://localhost:3000/user/create/${newUser._id}`, newUser ).then(
+			// Login animation ??
 			res => console.log(res)
 		)
 
@@ -115,12 +116,17 @@ export default class Register extends React.Component {
 								<li className="text-danger" id="password-warning-length">Passwords must be atleast 8 characters.</li> :
 								null
 							}
+							{
+								this.state.fname.length >= 35 || this.state.lname.length >= 35 ?
+								<li className="text-danger" id="password-warning-length">First or last name cannot have more than 35 characters.</li> :
+								null
+							}
 						</ul>
 						
 					}
                 	<div className="form-group form-check">
 						{ 
-							this.state.vpassword === this.state.password && this.validateEmail(this.state.email) && this.state.password.length >= 8 ? 
+							this.state.vpassword === this.state.password && this.validateEmail(this.state.email) && this.state.password.length >= 8  && ( this.state.fname.length <= 35 && this.state.lname.length <= 35 )? 
 								<input onClick={ this.onSubmit } type="submit" className="btn btn-primary" value="Register"/> :
 								<input type="submit" className="btn btn-primary" value="Register" disabled/>
 						}

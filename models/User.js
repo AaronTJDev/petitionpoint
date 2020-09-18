@@ -10,9 +10,10 @@ const userSchema = new Schema(
         email: { type: String, required: true, index: { unique: true }, maxlength:254 },
         passwordHash : { type: String, required: true },
         validity: { type: Number },
-        roles: { type: Array },
+        role: { type: String, enum: ['admin', 'coordinator', 'circulator'] },
         turnins: [turninSchema],
-        createdAt: { type: Date, default: Date.now }
+        createdAt: { type: Date, default: Date.now },
+        status: { type: String, enum: ['active', 'inactive'], default: 'active' }
     },
     { collection: 'users'}
 )

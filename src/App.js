@@ -25,7 +25,8 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-      this.getSession();
+    // 
+    this.getSession();
   }
 
   componentDidUpdate(){
@@ -69,6 +70,10 @@ class App extends React.Component {
     return false
   }
 
+  /**
+   * 
+   * @param {*} user 
+   */
   login = ( user ) => {
     this.setState({ user: user, authenticated: true });
   }

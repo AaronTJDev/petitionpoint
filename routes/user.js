@@ -18,7 +18,7 @@ router.post('/create/:id', function( req,res ){
     let user = new userModel(req.body);
 
     // Assign standard role
-    user.roles.push("circulator");
+    user.role = 'circulator';
 
     // Save user to db
     user.save( err => {
@@ -80,8 +80,6 @@ router.post('/authenticate', function( req,res ){
 
 
 router.put('/edit/:id', function( req,res ){
-    console.log("update route hit")
-    console.log(req.params)
     userModel.findByIdAndUpdate( req.params.id , { fname: req.body.fname, lname: req.body.lname }, function (err, user){
         console.log('userModel . findone used')
         if ( err ) {
@@ -105,8 +103,28 @@ router.put('/edit/:id', function( req,res ){
     });
 });
 
-router.delete('/delete/:id', function ( req,res ){
-    res.send("delete")
+router.put('/deactivate/:id', function ( req,res ){
+    userModel.findByIdAndUpdate( req.params.id , { status: 'inactive' }, function (err, user){
+        if ( err ) {
+            console.log("user not found");
+            res.status(404).send("User not found with the email that was provided.");
+        }
+
+        if ( user ) {
+            // Save updates to db
+            user.save( err => {
+                if (err) {
+                    console.log(`${err.name} : ${err.errmsg}`)
+                    res.status(400).send(`${err.name} : ${err.errmsg}`);
+                }
+                else { 
+                    console.log("saving user to database");
+                    res.status(200).send("Account successfully deactivated.")
+                }
+            });
+        }
+    });
+
 });
 
 module.exports = router;
