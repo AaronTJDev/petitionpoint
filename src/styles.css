@@ -76,6 +76,16 @@ footer div {
 #slide-menu {
   display: none;
 }
+.illustration {
+  position: relative;
+  display: inline-block;
+  background-position: bottom !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  bottom: -16px;
+  height: 18rem;
+  width: 24rem;
+}
 @media screen and (max-width: 576px) {
   #desktop-nav {
     display: none;
@@ -120,5 +130,10 @@ footer div {
   }
   #slide-menu-footer:hover {
     background-color: #b3d9eb;
+  }
+}
+@media (max-width: 768px) {
+  .illustration {
+    display: none !important;
   }
 }

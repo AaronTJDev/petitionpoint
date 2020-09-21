@@ -5,7 +5,7 @@ import './account.css';
 import { Redirect } from "react-router-dom";
 import { userContext } from '../../userContext';
 
-export default class Edit extends React.Component {
+export default class EditUser extends React.Component {
     constructor(props){
       super(props);
       this.state = {
@@ -109,11 +109,11 @@ export default class Edit extends React.Component {
                                 <button type="button" style={{display:'none'}} name="deactivate" className="col-4 mx-4 mb-3 btn btn-outline-danger btn-sm" onClick={this.deactivateAccount}>Deactivate</button>
                                 <div className="form-group form-check">
                                     <label htmlFor="First Name">First Name</label>
-                                    <input onChange={this.onChange} type="text" name="fname" className="form-control" disabled />
+                                    <input onChange={this.onChange} type="text" name="fname" className="form-control" readOnly />
                                 </div>
                                 <div className="form-group form-check">
                                     <label htmlFor="Last Name">Last Name</label>
-                                    <input onChange={this.onChange} type="text" name="lname" className="form-control" disabled />
+                                    <input onChange={this.onChange} type="text" name="lname" className="form-control" readOnly />
                                 </div>
                                 <div className="form-group form-check">
                                     <input onClick={ this.handleEdit } style={{display:'none'}} type="submit" className="btn btn-primary" value="Submit"/>
@@ -125,19 +125,19 @@ export default class Edit extends React.Component {
         );
     }  
 }
-Edit.contextType = userContext;
+EditUser.contextType = userContext;
 
 function toggleFormInputs (){
     // Seleect all form inputs and toggle them
     $('.form-control').each(function(input){
-        $(this).attr('disabled', !$(this).attr('disabled') );
+        $(this).attr('readonly', !$(this).attr('readonly') );
         $(this).removeAttr('value' );
     });
 }
 
 function toggleDeactivateButton() {
     // Select deactivate button and toggle it
-    if ( $('button[name="deactivate"]').css('display') == 'inline-block' ) {
+    if ( $('button[name="deactivate"]').css('display') === 'inline-block' ) {
         $('button[name="deactivate"]').css('display', 'none');
     } else {
         $('button[name="deactivate"]').css('display', 'inline-block');
@@ -146,7 +146,7 @@ function toggleDeactivateButton() {
 
 function toggleSubmitButton() {
     // Select submit button and toggle it
-    if ( $('input[type="submit"]').css('display') == 'inline-block' ) {
+    if ( $('input[type="submit"]').css('display') === 'inline-block' ) {
         $('input[type="submit"]').css('display', 'none');
     } else {
         $('input[type="submit"]').css('display', 'inline-block');

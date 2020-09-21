@@ -1,0 +1,18 @@
+.petition {
+  display: block;
+  text-align: left;
+}
+.petition-form {
+  width: 320px;
+  text-align: left;
+  display: inline-block;
+  padding: 24px;
+}
+#new-petition-img {
+  background: url('../../img/petition.svg');
+}
+@media (max-width: 576px) {
+  petition-form {
+    text-align: center;
+  }
+}

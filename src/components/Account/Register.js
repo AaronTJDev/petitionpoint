@@ -132,7 +132,7 @@ export default class Register extends React.Component {
 						}
                 	</div>
               	</form>
-				<div id="register-img" className="account-drawing px-md-3 px-lg-5"></div> 
+				<div id="register-img" className="illustration px-md-3 px-lg-5"></div> 
           	</div>
     	);
     }  

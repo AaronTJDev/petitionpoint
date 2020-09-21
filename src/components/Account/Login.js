@@ -76,7 +76,7 @@ export default class Login extends React.Component {
                             null
                     }
                 </form>
-                <div id="login-img" className="account-drawing px-md-3 px-lg-5"></div>
+                <div id="login-img" className="illustration px-md-3 px-lg-5"></div>
             </div>
         );
     }  

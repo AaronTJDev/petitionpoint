@@ -5,6 +5,8 @@ import { userContext } from './userContext';
 import Home from './components/Home';
 import Menu from './components/Menu/Menu';
 import Account from './components/Account/Account';
+import Petition from './components/Petition/Petition';
+import Turnin from './components/Turnins/Turnin';
 import axios from 'axios';
 import './styles.css';
 
@@ -110,8 +112,8 @@ class App extends React.Component {
             <main className="container">
                 <Switch>
                   <Route exact path="/" component = { Home } />
-                  <Route path="/turnin" />
-                  <Route path="/petition"/>
+                  <Route path="/turnin" component = { Turnin }/>
+                  <Route path="/petition" component = { Petition }/>
                   <Account/>
                 </Switch>
             </main>

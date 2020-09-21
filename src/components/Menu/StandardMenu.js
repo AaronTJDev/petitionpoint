@@ -7,13 +7,13 @@ class StandardMenu extends React.Component {
   render(){
     return (
           <nav className="navbar navbar-expand-md py-0">
-            <Link to="/" className="nav-item"><img src="img/logo.png" id="logo" className="navbar-brand" alt="Petition Point Logo" /></Link>
+            <Link to="/" className="nav-item"><img src="../img/logo.png" id="logo" className="navbar-brand" alt="Petition Point Logo" /></Link>
             <ul className="nav"  id="desktop-nav">
               <li className="nav-item">
                 <Link to="/" className="nav-link">Turn-in</Link>
               </li>
               <li className="nav-item">
-                <Link to="/" className="nav-link">Petitions</Link>
+                <Link to="/petition" className="nav-link">Petitions</Link>
               </li>
               <li className="nav-item">
                 <Link to="/" className="nav-link">Circulators</Link>

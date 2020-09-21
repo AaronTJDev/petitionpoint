@@ -8,10 +8,10 @@ class MobileMenu extends React.Component {
             <div className="h-100" id="slide-menu">
               <ul className="menu-nav"  id="slide-nav">
                 <li className="nav-item">
-                  <Link to="/" onClick={this.toggleMenu} className="nav-link mt-4">Turn-in</Link>
+                  <Link to="/" onClick={this.props.toggleMenu} className="nav-link mt-4">Turn-in</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" onClick={this.toggleMenu} className="nav-link">Petitions</Link>
+                  <Link to="/petition" onClick={this.props.toggleMenu} className="nav-link">Petitions</Link>
                 </li>
                 {
                 this.props.authenticated ?

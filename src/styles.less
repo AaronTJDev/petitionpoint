@@ -64,41 +64,52 @@ footer div {
     background-position: left;
     background-size: cover;
     background-position-x: center;
-  }
+}
   
-  #hero-text {
-    font-size: 36px;
-    font-weight: 300;
-    color: @white;
-    text-align:left;
-  }
+#hero-text {
+  font-size: 36px;
+  font-weight: 300;
+  color: @white;
+  text-align:left;
+}
   
-  #hero-highlight {
-    font-weight: 400;
-    color: @primary;
-  }
+#hero-highlight {
+  font-weight: 400;
+  color: @primary;
+}
   
-  .copy-article {
-    border: 0.5px solid lightgray;
-    border-bottom: none;
-    height: 360px;
-    font-size: 1.25rem;
-  }
+.copy-article {
+  border: 0.5px solid lightgray;
+  border-bottom: none;
+  height: 360px;
+  font-size: 1.25rem;
+}
   
-  #left {
-    background: @primary;
-    color: @white;
-  }
+#left {
+  background: @primary;
+  color: @white;
+}
   
-  #right {
-    background: @secondary;
-    color: #ffffff;
-  }
+#right {
+  background: @secondary;
+  color: #ffffff;
+}
 
-  #menu-icon, #slide-menu{
-    display: none;
-  }
-  
+#menu-icon, #slide-menu{
+  display: none;
+}
+
+.illustration {
+  position: relative;
+  display:inline-block;
+  background-position: bottom !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  bottom: -16px;
+  height: 18rem;
+  width: 24rem;
+}
+
 
 @media screen and (max-width: 576px) {
     #desktop-nav {
@@ -156,7 +167,9 @@ footer div {
 
 // Medium devices (tablets, 768px and up)
 @media (max-width: 768px) { 
-
+  .illustration {
+    display:none !important;
+  }
 }
 
 // Large devices (desktops, 992px and up)
