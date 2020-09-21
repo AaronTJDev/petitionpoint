@@ -117,7 +117,7 @@ export default class Register extends React.Component {
 								null
 							}
 							{
-								this.state.fname.length >= 35 || this.state.lname.length >= 35 ?
+								(this.state.fname != null && this.state.lname != null ) && ( this.state.fname.length >= 35 || this.state.lname.length >= 35 ) ?
 								<li className="text-danger" id="password-warning-length">First or last name cannot have more than 35 characters.</li> :
 								null
 							}
