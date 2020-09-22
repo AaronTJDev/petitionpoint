@@ -1,6 +1,5 @@
 import React from 'react';
 import $ from 'jquery'
-import '../../styles.css';
 import StandardMenu from './StandardMenu';
 import MobileMenu from './MobileMenu';
 

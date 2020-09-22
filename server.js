@@ -12,8 +12,6 @@ const SESSION_KEY = process.env.SESSION_KEY;
 const SESSION_DURATION = parseInt(process.env.SESSION_DURATION);
 const DB_CONN_URL = process.env.LOCAL_DB_CONN_URL;
 
-console.log(process.env);
-
 // Determine port
 const port = process.env.PORT || 3000;
 

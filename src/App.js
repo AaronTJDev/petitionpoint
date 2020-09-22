@@ -8,7 +8,9 @@ import Account from './components/Account/Account';
 import Petition from './components/Petition/Petition';
 import Turnin from './components/Turnins/Turnin';
 import axios from 'axios';
-import './styles.css';
+import './assets/style/css/styles.css';
+import './assets/style/css/account.css';
+import './assets/style/css/petition.css';
 
 class App extends React.Component {
   constructor(props) {

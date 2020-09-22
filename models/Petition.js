@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let petitionSchema = new Schema(
+const petitionSchema = new Schema(
     {
+        _id: mongoose.Schema.Types.ObjectId,
         name: { type: String },
         state: { type: String },
         description: { type: String }, 
@@ -17,9 +18,14 @@ let petitionSchema = new Schema(
             illegible: { type: Number },
             wrongAddress: { type: Number }
         },
+        creatorId: { type: mongoose.Types.ObjectId, ref: 'User' },
+        organizationId: { type: mongoose.Types.ObjectId },
         previousVersions: [ this ]
     },
     { collection: 'petitions' }
 );
 
-module.exports = petitionSchema;
+
+const Petition = mongoose.model('Petition', petitionSchema)
+
+module.exports = Petition;

@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
-import './account.css';
 
 const mongoose = require('mongoose');
 

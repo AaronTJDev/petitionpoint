@@ -1,5 +1,4 @@
 import React from 'react';
-import './account.css';
 import { Redirect } from "react-router-dom";
 import { userContext } from '../../userContext';
 

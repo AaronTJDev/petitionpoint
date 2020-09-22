@@ -3,6 +3,7 @@ import axios from 'axios';
 import { userContext } from '../../userContext';
 const UsaStates = require('usa-states').UsaStates;
 const us_states = new UsaStates().arrayOf('abbreviations');
+const mongoose = require('mongoose');
 
 export default class NewPetition extends React.Component {
     constructor(props){
@@ -25,12 +26,30 @@ export default class NewPetition extends React.Component {
             this.setState({ state: target.value});
         } 
         else if ( target.name === 'description' ){
-            console.log(target);
             this.setState({ descripition: target.value});
         } 
         else if ( target.name === 'payPerSignature' ){
             this.setState({ payPerSignature: target.value});
         }
+    }
+    
+	onSubmit = (e) => {
+		e.preventDefault();
+
+		var newPetition = {
+			_id: mongoose.Types.ObjectId(),
+			title: this.state.title.trim(),
+          	description: this.state.description.trim(),
+          	state: this.state.state,
+          	payPerSignature: this.state.payPerSignature
+		};
+
+		axios.post(`http://localhost:3000/petition/new/${newPetition._id}`, newPetition ).then(
+			// Login animation ??
+			res => console.log(res)
+		)
+
+		this.setState({ redirect: '/petition' });
 	}
 
     render(){
@@ -63,7 +82,7 @@ export default class NewPetition extends React.Component {
                         <textarea onChange={this.onChange} name="description" className="form-control" />
                     </div>
                     <div className="form-group py-2">
-                        <button type="submit" className="btn btn-primary">Publish</button>
+                        <input onClick={this.onSubmit} type="submit" className="btn btn-primary" value="Publish"/>
                     </div>
               	</form>
 				<div id="new-petition-img" className="illustration px-md-4 px-lg-5"></div> 

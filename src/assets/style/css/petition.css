@@ -11,8 +11,3 @@
 #new-petition-img {
   background: url('../../img/petition.svg');
 }
-@media (max-width: 576px) {
-  petition-form {
-    text-align: center;
-  }
-}

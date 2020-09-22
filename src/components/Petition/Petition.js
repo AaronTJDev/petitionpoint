@@ -3,7 +3,6 @@ import axios from 'axios';
 import { userContext } from '../../userContext';
 import { Route, Link } from 'react-router-dom';
 import NewPetition from './NewPetition'
-import './petition.css'
 
 function PetitionDashboard(props){
     return (

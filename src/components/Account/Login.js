@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import './account.css';
 import { Redirect } from "react-router-dom";
 import { userContext } from '../../userContext';
 
