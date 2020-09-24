@@ -10,7 +10,7 @@ const userSchema = new Schema(
         email: { type: String, required: true, index: { unique: true }, maxlength:254 },
         passwordHash : { type: String, required: true },
         validity: { type: Number },
-        role: { type: String, enum: ['admin', 'coordinator', 'circulator'] },
+        role: { type: String, enum: ['admin', 'coordinator', 'circulator'], default: 'circulator' },
         turnins: [turninSchema],
         createdAt: { type: Date, default: Date.now },
         status: { type: String, enum: ['active', 'inactive'], default: 'active' }
@@ -33,8 +33,6 @@ userSchema.pre('save', function ( next ){
         if(err){
             res.status(500).send();
         }
-
-        console.log('hashing password')
         user.passwordHash = hash;
         next();
     });

@@ -1,8 +1,18 @@
 const app = require('../../server');
 const supertest = require('supertest');
 const _s = supertest(app);
-const userModel = require('../../models/User')
+
 const mongoose = require('mongoose');
+const userModel = require('../../models/User')
+const _ = require('lodash')
+
+const testUser = {
+    _id: mongoose.Types.ObjectId(),
+    fname: 'Jackie',
+    lname: 'Doe',
+    email: 'jackiedoe@email.com',
+    passwordHash: 'bibigo90',
+};
 
 describe("server is running", () => {
     test("get home page", async done => {
@@ -18,12 +28,16 @@ describe("user controller behaves as expected", () => {
         await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
     });
 
+    beforeEach(async () => {
+        addTestUserToDb();
+    });
+
     afterAll(async () => {
         await mongoose.disconnect()
     })
 
     afterEach( async () => {
-        await userModel.deleteOne({ email: 'jackiedoe@email.com' });
+        removeTestUserFromDb();
     });
 
     test("user/id route responds with 400 status code if there is no id", async done => {
@@ -34,45 +48,21 @@ describe("user controller behaves as expected", () => {
         done();
     });
 
-    test("user/create responds with 201 status", async done => {
-        let newUser = {
-			_id: mongoose.Types.ObjectId(),
-			fname: 'Jackie',
-          	lname: 'Doe',
-          	email: 'jackiedoe@email.com',
-          	passwordHash: 'bibigo90',
-		};
-
+    test.skip("user/create responds with 201 status", async done => {
         _s
             .post('/user/create/12345')
-            .send(newUser)
-            .expect(201)
+            .send(testUser)
             .end(function(err, res) {
-                if (err) return done(err);
+                if (err) return done(err, res);
+                expect(res).toBe(201);
                 done();
             });
     });
 
     test("user/create responds with 400 status if a user exists with same email", async done => {
-        let newUser = {
-			_id: mongoose.Types.ObjectId(),
-			fname: 'Jackie',
-          	lname: 'Doe',
-          	email: 'jackiedoe@email.com',
-          	passwordHash: 'bibigo90',
-		};
-
         _s
             .post('/user/create/12345')
-            .send(newUser)
-            .end(function(err, res) {
-                if (err) return done(err);
-                done();
-            });
-
-        _s
-            .post('/user/create/12345')
-            .send(newUser)
+            .send(testUser)
             .expect(400)
             .end(function(err, res) {
                 if (err) return done(err);
@@ -81,25 +71,8 @@ describe("user controller behaves as expected", () => {
     });
 
     test("user/authenticate returns an object", async done => {
-        // Add user to database
-        let user = {
-			_id: mongoose.Types.ObjectId(),
-			fname: 'Jackie',
-          	lname: 'Doe',
-          	email: 'jackiedoe@email.com',
-          	passwordHash: 'bibigo90',
-		};
-
-        _s
-            .post('/user/create/1234')
-            .send(user)
-            .end(function(err, res) {
-                if (err) return done(err);
-                done();
-            });
-
         _s.post('/user/authenticate')
-            .send(user)
+            .send(testUser)
             .set('Accept', 'application/json')
             .expect(200)
             .end(function(err, res) {
@@ -114,23 +87,7 @@ describe("user controller behaves as expected", () => {
     });
 
     test("user/edit returns 200", async done => {
-        // Add user to database
-        let user = {
-			_id: mongoose.Types.ObjectId(),
-			fname: 'Jackie',
-          	lname: 'Doe',
-          	email: 'jackiedoe@email.com',
-          	passwordHash: 'bibigo90',
-        };
-
-        _s
-            .post('/user/create/12345')
-            .send(user)
-            .end(function(err, res) {
-                if (err) return done(err);
-            });
-
-        // Update user
+        var user = _.cloneDeep(testUser);
         user.fname = "Sarah"
         user.lname = "Doeson"
 
@@ -145,3 +102,11 @@ describe("user controller behaves as expected", () => {
     });
 });
 
+async function addTestUserToDb(){
+    let user = new userModel(testUser);
+    await userModel.create(user);
+}
+
+async function removeTestUserFromDb(){
+    await userModel.remove({ email: 'jackiedoe@email.com' });
+}

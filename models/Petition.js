@@ -20,11 +20,12 @@ const petitionSchema = new Schema(
         },
         creatorId: { type: mongoose.Types.ObjectId, ref: 'User' },
         organizationId: { type: mongoose.Types.ObjectId },
-        previousVersions: [ this ]
+        previousVersions: [{
+            _id: { type: String, ref: 'Petitions' }
+        }]
     },
     { collection: 'petitions' }
 );
-
 
 const Petition = mongoose.model('Petition', petitionSchema)
 
