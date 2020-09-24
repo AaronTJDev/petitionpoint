@@ -17,9 +17,12 @@ export default class Login extends React.Component {
     onChange = (e) => {
         var target = e.target;
         
-        if ( target.name === 'email' ){
+        if (target.name === 'email')
+        {
             this.setState({ email: target.value});
-        } else if ( target.name === 'password' ){
+        } 
+        else if (target.name === 'password')
+        {
             this.setState({ password: target.value});
         }
 	}

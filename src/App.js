@@ -33,19 +33,22 @@ class App extends React.Component {
     }
 
     componentDidUpdate(){
-        if(this.state.user === {}){
+		if(this.state.user === {})
+		{
             this.getSession();
         }
     }
 
-    isSession = () => {
+    sessionExists = () => {
     	// Check if session id exists
-    	if ( document.cookie.length > 0 ) {
+		if (document.cookie.length > 0) 
+		{
 			var sid = document.cookie
 				.split('; ')
 				.find( row => row.startsWith('sid') )
 
-			if ( sid ){
+			if (sid)
+			{
 				return sid.split('=')[1];;
 			}
     	}
@@ -54,13 +57,14 @@ class App extends React.Component {
 
 	getSession = ( ) => {
 		// Check if session exists
-    	if( this.isSession() ){
-    	  	axios.get(`http://localhost:3000/user/${this.isSession()}`)
+		if(this.sessionExists())
+		{
+    	  	axios.get(`http://localhost:3000/user/${this.sessionExists()}`)
     	  		.then( res => {
-    	    		console.log(res.data);
-    	    		if ( res.data ){
+					if (res.data)
+					{
     	      		this.setState({ user: res.data, authenticated: true })
-    	    	}
+    	    		}
     	  	})
     	  	.catch( err => {
     	   		console.log(err);
@@ -76,12 +80,14 @@ class App extends React.Component {
 	logout = () => {
 		axios.post('http://localhost:3000/user/logout/')
     		.then( res => {
-        		if ( res.status === 200 ){
+				if (res.status === 200)
+				{
           		this.setState({ user: null, authenticated: false });
-        	}
+        		}
       	})
       	.catch( err => {
-        	if ( err ){
+			if (err)
+			{
           	// Error handling for front-end here
         	}
       	});

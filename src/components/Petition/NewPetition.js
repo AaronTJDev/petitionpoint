@@ -19,16 +19,20 @@ export default class NewPetition extends React.Component {
     onChange = (e) => {
 		var target = e.target;
         
-        if ( target.name === 'title' ){
+        if (target.name === 'title')
+        {
             this.setState({ title: target.value });
         } 
-        else if ( target.name === 'state' ){
+        else if (target.name === 'state')
+        {
             this.setState({ state: target.value});
         } 
-        else if ( target.name === 'description' ){
+        else if (target.name === 'description')
+        {
             this.setState({ descripition: target.value});
         } 
-        else if ( target.name === 'payPerSignature' ){
+        else if (target.name === 'payPerSignature')
+        {
             this.setState({ payPerSignature: target.value});
         }
     }

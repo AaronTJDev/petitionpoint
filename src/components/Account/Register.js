@@ -28,15 +28,24 @@ export default class Register extends React.Component {
     onChange = (e) => {
 		var target = e.target;
         
-        if ( target.name === 'fname' ){
+		if (target.name === 'fname')
+		{
             this.setState({ fname: target.value });
-        } else if ( target.name === 'lname' ){
+		} 
+		else if (target.name === 'lname')
+		{
             this.setState({ lname: target.value});
-        } else if ( target.name === 'email' ){
+		} 
+		else if (target.name === 'email')
+		{
             this.setState({ email: target.value});
-        } else if ( target.name === 'password' ){
+		} 
+		else if (target.name === 'password')
+		{
             this.setState({ password: target.value});
-        } else if ( target.name === 'vpassword' ){
+		} 
+		else if (target.name === 'vpassword')
+		{
             this.setState({ vpassword: target.value});
         }
 	}
