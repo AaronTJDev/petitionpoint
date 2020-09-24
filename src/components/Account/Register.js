@@ -7,15 +7,15 @@ const mongoose = require('mongoose');
 
 export default class Register extends React.Component {
     constructor(props){
-      super();
-      this.state = {
-          fname: '',
-          lname: '',
-          email: '',
-          password: '',
-		  vpassword: '',
-		  redirect: undefined
-      }
+      	super();
+      	this.state = {
+        	fname: '',
+          	lname: '',
+          	email: '',
+          	password: '',
+		  	vpassword: '',
+		  	redirect: undefined
+      	}
 	}
 	
 	componentDidMount() {

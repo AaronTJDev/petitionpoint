@@ -13,124 +13,110 @@ import './assets/style/css/account.css';
 import './assets/style/css/petition.css';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {},
-      authenticated: false
-    }
-  }
-
-  onPageChange(){
-    $(window).on( 'load', function () {
-      var pageHeight = document.body.scrollHeight < 900 ? parseInt($('#root').css('height')) * 1.33 : parseInt($('#root').css('height'));
-      $('body').css('height', `${pageHeight}px`);
-    });
-  }
-
-  componentDidMount(){
-    // 
-    this.getSession();
-  }
-
-  componentDidUpdate(){
-    if(this.state.user === {}){
-      this.getSession();
-    }
-  }
-
-  isSession = () => {
-    // Check if session id exists
-    if ( document.cookie.length > 0 ) {
-      // check for cookie titiled 'sid'
-      var sid = document.cookie
-        .split('; ')
-        .find( row => row.startsWith('sid') )
-
-      // if found, get value of sid
-      if ( sid ){
-        return sid.split('=')[1];;
-      }
-    }
-
-    return false;
-  }
-
-  getSession = ( ) => {
-    // Check if session exists
-    if( this.isSession() ){
-      axios.get(`http://localhost:3000/user/${this.isSession()}`)
-      .then( res => {
-        console.log(res.data);
-        if ( res.data ){
-          this.setState({ user: res.data, authenticated: true })
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: {},
+            authenticated: false
         }
-      })
-      .catch( err => {
-        console.log(err);
-      });
     }
 
-    return false
-  }
+    onPageChange(){
+        $(window).on( 'load', function () {
+            var pageHeight = document.body.scrollHeight < 900 ? parseInt($('#root').css('height')) * 1.33 : parseInt($('#root').css('height'));
+            $('body').css('height', `${pageHeight}px`);
+        });
+    }
 
-  /**
-   * 
-   * @param {*} user 
-   */
-  login = ( user ) => {
-    this.setState({ user: user, authenticated: true });
-  }
+    componentDidMount(){
+        this.getSession();
+    }
 
-  logout = () => {
-    axios.post('http://localhost:3000/user/logout/')
-      .then( res => {
-        if ( res.status === 200 ){
-          this.setState({ user: null, authenticated: false });
+    componentDidUpdate(){
+        if(this.state.user === {}){
+            this.getSession();
         }
-      })
-      .catch( err => {
-        if ( err ){
-          // Error handling for front-end here
-        }
-      });
-  }
+    }
 
-  render(){
+    isSession = () => {
+    	// Check if session id exists
+    	if ( document.cookie.length > 0 ) {
+			var sid = document.cookie
+				.split('; ')
+				.find( row => row.startsWith('sid') )
 
-    // Value object to be consumed by context consumers.
-    const value = {
-      user: this.state.user,
-      loginUser: this.login,
-      logoutUser: this.logout
-    };
+			if ( sid ){
+				return sid.split('=')[1];;
+			}
+    	}
+    	return false;
+  	}
 
-    return (
-      <userContext.Provider value={ value }>
-        <Router>
-          <div className="App">
-            <Menu user={this.state.user} authenticated={this.state.authenticated}/>
-            
-            <main className="container">
-                <Switch>
-                  <Route exact path="/" component = { Home } />
-                  <Route path="/turnin" component = { Turnin }/>
-                  <Route path="/petition" component = { Petition }/>
-                  <Account/>
-                </Switch>
-            </main>
-            <footer className="footer text-muted">
-              <div className="container">
-                &copy; 2020 - Petition Point - <a href="example.com">Privacy</a>
-              </div>
-            </footer>
-          </div>
+	getSession = ( ) => {
+		// Check if session exists
+    	if( this.isSession() ){
+    	  	axios.get(`http://localhost:3000/user/${this.isSession()}`)
+    	  		.then( res => {
+    	    		console.log(res.data);
+    	    		if ( res.data ){
+    	      		this.setState({ user: res.data, authenticated: true })
+    	    	}
+    	  	})
+    	  	.catch( err => {
+    	   		console.log(err);
+    	  	});
+    	}
+    	return false;
+  	}
 
-        </Router>
-      </userContext.Provider>
-    );
-  }
+	login = ( user ) => {
+		this.setState({ user: user, authenticated: true });
+	}
 
+	logout = () => {
+		axios.post('http://localhost:3000/user/logout/')
+    		.then( res => {
+        		if ( res.status === 200 ){
+          		this.setState({ user: null, authenticated: false });
+        	}
+      	})
+      	.catch( err => {
+        	if ( err ){
+          	// Error handling for front-end here
+        	}
+      	});
+  	}
+
+	render(){
+		// Value object to be consumed by context consumers.
+		const value = {
+			user: this.state.user,
+			loginUser: this.login,
+			logoutUser: this.logout
+		};
+
+		return (
+			<userContext.Provider value={ value }>
+				<Router>
+					<div className="App">
+						<Menu user={ this.state.user } authenticated={ this.state.authenticated }/>
+						<main className="container">
+							<Switch>
+								<Route exact path="/" component = { Home } />
+								<Route path="/turnin" component = { Turnin }/>
+								<Route path="/petition" component = { Petition }/>
+								<Account/>
+							</Switch>
+						</main>
+						<footer className="footer text-muted">
+							<div className="container">
+								&copy; 2020 - Petition Point - <a href="example.com">Privacy</a>
+							</div>
+						</footer>
+					</div>
+				</Router>
+			</userContext.Provider>
+		);
+	}
 }
-
 export default App;

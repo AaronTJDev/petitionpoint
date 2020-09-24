@@ -5,13 +5,13 @@ import { userContext } from '../../userContext';
 
 export default class Login extends React.Component {
     constructor(props){
-      super(props);
-      this.state = {
-          email: '',
-          password: '',
-          redirect: undefined,
-          failedLogin: null
-      }
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            redirect: undefined,
+            failedLogin: null
+        }
     }
     
     onChange = (e) => {
