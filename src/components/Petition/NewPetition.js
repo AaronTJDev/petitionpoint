@@ -29,7 +29,7 @@ export default class NewPetition extends React.Component {
         } 
         else if (target.name === 'description')
         {
-            this.setState({ descripition: target.value});
+            this.setState({ description: target.value});
         } 
         else if (target.name === 'payPerSignature')
         {
@@ -45,10 +45,11 @@ export default class NewPetition extends React.Component {
 			title: this.state.title.trim(),
           	description: this.state.description.trim(),
           	state: this.state.state,
-          	payPerSignature: this.state.payPerSignature
+            payPerSignature: this.state.payPerSignature,
+            creatorId: this.context.user._id
 		};
 
-		axios.post(`http://localhost:3000/petition/new/${newPetition._id}`, newPetition ).then(
+		axios.post(`/petition/create/${newPetition._id}`, newPetition ).then(
 			// Login animation ??
 			res => console.log(res)
 		)

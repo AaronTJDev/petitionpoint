@@ -21,7 +21,7 @@ router.post('/create/:id', function( req,res ){
         {
             res.status(400).send(`${err.name} : ${err.errmsg}`);
         }
-        else if(res_user)
+        else if(res.user)
         {
             res.status(201).send("Account successfully created.")
         }

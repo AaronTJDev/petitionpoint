@@ -38,7 +38,7 @@ export default class Login extends React.Component {
         };
         
         // Send post request to login route using userInfo
-        axios.post(`http://localhost:3000/user/authenticate`, userInfo )
+        axios.post(`/user/authenticate`, userInfo )
             .then( res => {
                 if ( res.status === 200 ){
                     // Update user object within state in App.js 

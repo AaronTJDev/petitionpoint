@@ -61,7 +61,7 @@ export default class Register extends React.Component {
           	passwordHash: this.state.password,
 		};
 
-		axios.post(`http://localhost:3000/user/create/${newUser._id}`, newUser ).then(
+		axios.post(`/user/create/${newUser._id}`, newUser ).then(
 			// Login animation ??
 			res => console.log(res)
 		)

@@ -55,15 +55,14 @@ class App extends React.Component {
     	return false;
   	}
 
-	getSession = ( ) => {
-		// Check if session exists
+	getSession = () => {
 		if(this.sessionExists())
 		{
-    	  	axios.get(`http://localhost:3000/user/${this.sessionExists()}`)
+    	  	axios.get(`/user/${this.sessionExists()}`)
     	  		.then( res => {
 					if (res.data)
 					{
-    	      		this.setState({ user: res.data, authenticated: true })
+    	      			this.setState({ user: res.data, authenticated: true })
     	    		}
     	  	})
     	  	.catch( err => {
@@ -78,7 +77,7 @@ class App extends React.Component {
 	}
 
 	logout = () => {
-		axios.post('http://localhost:3000/user/logout/')
+		axios.post('/user/logout/')
     		.then( res => {
 				if (res.status === 200)
 				{
@@ -97,6 +96,7 @@ class App extends React.Component {
 		// Value object to be consumed by context consumers.
 		const value = {
 			user: this.state.user,
+			authenticated: this.state.authenticated,
 			loginUser: this.login,
 			logoutUser: this.logout
 		};
@@ -105,7 +105,7 @@ class App extends React.Component {
 			<userContext.Provider value={ value }>
 				<Router>
 					<div className="App">
-						<Menu user={ this.state.user } authenticated={ this.state.authenticated }/>
+						<Menu user={ this.state.user }/>
 						<main className="container">
 							<Switch>
 								<Route exact path="/" component = { Home } />

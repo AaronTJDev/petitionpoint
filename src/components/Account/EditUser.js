@@ -47,15 +47,13 @@ export default class EditUser extends React.Component {
     updateUser = (e) => {
         e.preventDefault();
     
-        // Get updated user info from state
         let user = {
             _id: this.context.user._id,
             fname: this.state.fname,
             lname: this.state.lname
         }
         
-        // Send PUT request to edit route using updated user
-        axios.put(`http://localhost:3000/user/edit/${user._id}`, user )
+        axios.put(`/user/edit/${user._id}`, user )
         .then( res => {
             if (res.status === 200)
             {
@@ -76,7 +74,7 @@ export default class EditUser extends React.Component {
         
         if(userConfirmsDeactivation)
         {
-            axios.put(`http://localhost:3000/user/deactivate/${userId}` )
+            axios.put(`/user/deactivate/${userId}` )
             .then( res => {
                 if (res.status === 200)
                 {

@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
+const User = require('./User');
 const Schema = mongoose.Schema;
 
 const petitionSchema = new Schema(
     {
         _id: mongoose.Schema.Types.ObjectId,
-        name: { type: String },
+        title: { type: String },
         state: { type: String },
         description: { type: String }, 
         payPerSignature: { type: Number },
@@ -18,10 +19,10 @@ const petitionSchema = new Schema(
             illegible: { type: Number },
             wrongAddress: { type: Number }
         },
-        creatorId: { type: mongoose.Types.ObjectId, ref: 'User' },
-        organizationId: { type: mongoose.Types.ObjectId },
+        creatorId: { type: Schema.ObjectId, ref: 'User' },
+        organizationId: { type: Schema.ObjectId },
         previousVersions: [{
-            _id: { type: String, ref: 'Petitions' }
+            _id: { type: Schema.ObjectId, ref: 'Petition' }
         }]
     },
     { collection: 'petitions' }

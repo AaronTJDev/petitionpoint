@@ -24,11 +24,11 @@ class Menu extends React.Component {
 			<header>
 				<StandardMenu 
 					toggleMenu={() => this.toggleMenu()}
-					authenticated={this.props.authenticated}
+					authenticated={this.context.authenticated}
 				/>
 				<MobileMenu 
 					toggleMenu={() => this.toggleMenu()}
-					authenticated={this.props.authenticated}
+					authenticated={this.context.authenticated}
 				/>
 			</header>
 		);

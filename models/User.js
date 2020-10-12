@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const turninSchema = require('./User');
+const Turnins = require('./User');
 
 const userSchema = new Schema(
     {
@@ -11,7 +11,8 @@ const userSchema = new Schema(
         passwordHash : { type: String, required: true },
         validity: { type: Number },
         role: { type: String, enum: ['admin', 'coordinator', 'circulator'], default: 'circulator' },
-        turnins: [turninSchema],
+        turnins: [Turnins],
+        petitions: { type: Schema.ObjectId, ref: 'Petition' },
         createdAt: { type: Date, default: Date.now },
         status: { type: String, enum: ['active', 'inactive'], default: 'active' }
     },
@@ -34,7 +35,7 @@ userSchema.pre('save', function ( next ){
             res.status(500).send();
         }
         user.passwordHash = hash;
-        next();
+        return next();
     });
 });
 

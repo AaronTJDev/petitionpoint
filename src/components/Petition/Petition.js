@@ -1,20 +1,56 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { userContext } from '../../userContext';
 import { Route, Link } from 'react-router-dom';
 import NewPetition from './NewPetition'
+import Row from './Row';
+import { initial } from 'lodash';
 
 function PetitionDashboard(props){
+    const user = useContext(userContext);
+    const [petitions, setPetitions] = useState([]);
+
+    useEffect(() => {
+        if(petitions.length === 0 && user.user._id) {
+            axios.get(`/petition/${user.user._id}`)
+                .then( res => {
+                    if(res.data.length)
+                    {
+                        setPetitions(petitions => petitions.concat(res.data));
+                    }
+                }) 
+                .catch( err => console.log(err));
+        }
+    });
+
     return (
-        <div className="row mt-4s">
+        <div className="row mt-4">
             <h1 className="display-4 col-12">Petitions</h1>
             <Link to="/petition/new" className="px-3">New Petition<i className="fa fa-plus-square mx-2"></i></Link>
+            <div class="table-responsive">
+            <table class="table mx-auto mt-3">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Pay Per Signature</th>
+                        <th>Published On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        petitions.map( petition => <Row data={petition}/> )
+                    }
+                </tbody>
+            </table>
+        </div>
         </div>
     )
 }
 
 export default class Petition extends React.Component {
     render(){
+        console.log(this.context);
         return (
             <div>
                 <Route exact path="/petition" component={ PetitionDashboard } />
@@ -40,3 +76,13 @@ Petition.contextType = userContext;
 
 
 */
+
+function containsObject(obj, list) {;
+    for (let i = 0; i < list.length; i++) {
+        if (list[i] === obj) {
+            return true;
+        }
+    }
+
+    return false;
+}
